@@ -4,133 +4,169 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Base Builder Score — your onchain reputation, scored</title>
-<meta name="description" content="Six onchain signals turned into a single score. Read activity, identity, trust and reputation for any Base wallet — no login."/>
+<meta name="description" content="Score any Base wallet against six onchain signals. Identity, activity, tenure, builder, $ flow and Ethos trust — checked criterion by criterion."/>
 <meta property="og:title" content="Base Builder Score"/>
-<meta property="og:description" content="One score. Six signals. Read live from Base mainnet, Basenames and Ethos Network."/>
+<meta property="og:description" content="One score, six signals, checked criterion by criterion. Read live from Base mainnet, Basenames & Ethos."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
 <style>
 :root{
-  --bg:#08090d; --bg-2:#0e1019; --bg-3:#161924; --bg-4:#1d2130;
-  --border:#222536; --border-2:#2d3146;
-  --ink:#f1f3f8; --mute:#8b91a6; --faint:#52576a;
-  --base:#0052ff; --base-glow:rgba(0,82,255,0.18); --base-soft:#3b78ff;
-  --green:#26d987; --amber:#f3b341; --red:#ff5a6a;
+  --bg:#ffffff;
+  --bg-2:#fafbfc;
+  --bg-3:#f3f5f8;
+  --bg-4:#e9ecf1;
+  --border:#e5e7eb;
+  --border-2:#d1d5db;
+  --ink:#0a0b14;
+  --mute:#6b7280;
+  --faint:#9ca3af;
+  --base:#0052ff;
+  --base-soft:#3b78ff;
+  --base-bg:#eef2ff;
+  --green:#10b981;
+  --green-bg:#ecfdf5;
+  --amber:#f59e0b;
+  --red:#ef4444;
+  --red-bg:#fef2f2;
   --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
   --mono:'JetBrains Mono',ui-monospace,monospace;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
-html,body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;min-height:100vh;}
+html,body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;min-height:100vh;-webkit-font-smoothing:antialiased;}
 body{
   background:
-    radial-gradient(ellipse 90% 60% at 50% -15%, rgba(0,82,255,0.10), transparent 70%),
-    radial-gradient(ellipse 60% 40% at 50% 110%, rgba(0,82,255,0.05), transparent 60%),
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0,82,255,0.04), transparent 60%),
     var(--bg);
 }
-.wrap{max-width:980px;margin:0 auto;padding:24px 22px 80px;}
+.wrap{max-width:1120px;margin:0 auto;padding:24px 22px 80px;}
 
-header{display:flex;justify-content:space-between;align-items:center;padding:8px 0 24px;border-bottom:1px solid var(--border);}
-.brand{display:flex;align-items:center;gap:11px;font-weight:700;font-size:16px;letter-spacing:-0.01em;}
-.brand-mark{width:24px;height:24px;background:var(--base);border-radius:6px;position:relative;display:flex;align-items:center;justify-content:center;}
-.brand-mark::after{content:'';width:10px;height:10px;background:var(--bg);border-radius:2px;}
+/* ── HEADER ── */
+header{display:flex;justify-content:space-between;align-items:center;padding:6px 0 26px;}
+.brand{display:flex;align-items:center;gap:11px;font-weight:700;font-size:16px;letter-spacing:-0.015em;}
+.brand-mark{width:26px;height:26px;background:var(--base);border-radius:7px;position:relative;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,82,255,0.25);}
+.brand-mark::after{content:'';width:10px;height:10px;background:#fff;border-radius:2px;}
 .brand em{font-style:normal;color:var(--mute);font-weight:500;}
-.hmeta{font-family:var(--mono);font-size:11px;color:var(--mute);letter-spacing:0.02em;display:flex;align-items:center;gap:8px;}
-.hmeta .dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);}
+.hmeta{font-family:var(--mono);font-size:11px;color:var(--mute);letter-spacing:0.02em;display:flex;align-items:center;gap:8px;background:var(--bg-3);padding:6px 12px;border-radius:99px;border:1px solid var(--border);}
+.hmeta .dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);}
 
-.hero{padding:64px 0 36px;}
-.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:0.22em;color:var(--base-soft);text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;margin-bottom:22px;}
-.eyebrow::before{content:'';width:18px;height:1px;background:var(--base-soft);}
-h1{font-size:clamp(40px,6vw,68px);font-weight:700;line-height:1.02;letter-spacing:-0.03em;}
-h1 .grad{background:linear-gradient(180deg,#fff 0%,#818699 100%);-webkit-background-clip:text;background-clip:text;color:transparent;}
-h1 em{font-style:normal;color:var(--base-soft);}
-.lede{margin-top:22px;color:var(--mute);font-size:16px;line-height:1.6;max-width:560px;}
+/* ── HERO ── */
+.hero{padding:32px 0 28px;text-align:center;}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:0.22em;color:var(--base);text-transform:uppercase;margin-bottom:18px;font-weight:600;}
+h1{font-size:clamp(36px,5.5vw,58px);font-weight:700;line-height:1.05;letter-spacing:-0.03em;max-width:780px;margin:0 auto;}
+h1 em{font-style:normal;color:var(--base);}
+.lede{margin:18px auto 0;color:var(--mute);font-size:16px;line-height:1.6;max-width:600px;}
 
-.input-shell{margin-top:36px;max-width:580px;display:flex;border:1px solid var(--border-2);background:var(--bg-2);border-radius:12px;padding:6px 6px 6px 16px;align-items:center;transition:border-color .2s,box-shadow .2s;}
-.input-shell:focus-within{border-color:var(--base);box-shadow:0 0 0 4px var(--base-glow);}
+.input-shell{margin:30px auto 0;max-width:560px;display:flex;background:var(--bg);border:1px solid var(--border-2);border-radius:12px;padding:6px 6px 6px 18px;align-items:center;transition:border-color .2s,box-shadow .2s;box-shadow:0 1px 2px rgba(0,0,0,0.04);}
+.input-shell:focus-within{border-color:var(--base);box-shadow:0 0 0 4px rgba(0,82,255,0.12);}
 .input-shell .at{font-family:var(--mono);color:var(--faint);font-size:14px;margin-right:8px;}
 .input-shell input{flex:1;background:none;border:none;outline:none;color:var(--ink);font-family:var(--mono);font-size:14px;padding:13px 0;}
 .input-shell input::placeholder{color:var(--faint);}
-.input-shell button{font-family:var(--sans);font-weight:600;font-size:13.5px;padding:11px 20px;background:var(--base);color:#fff;border:none;border-radius:8px;cursor:pointer;transition:background .15s;}
+.input-shell button{font-family:var(--sans);font-weight:600;font-size:13.5px;padding:11px 22px;background:var(--base);color:#fff;border:none;border-radius:8px;cursor:pointer;transition:background .15s;}
 .input-shell button:hover{background:var(--base-soft);}
 .input-shell button:disabled{background:var(--faint);cursor:wait;}
-.subtle{font-family:var(--mono);font-size:11px;color:var(--faint);margin-top:14px;letter-spacing:0.02em;}
+.subtle{font-family:var(--mono);font-size:11.5px;color:var(--faint);margin-top:16px;letter-spacing:0.02em;}
 .subtle b{color:var(--mute);font-weight:500;}
 
-.result{margin-top:64px;display:none;animation:fadeUp .5s cubic-bezier(.2,.7,.2,1);}
+/* ── RESULT GRID ── */
+.result{margin-top:42px;display:none;animation:fadeUp .5s cubic-bezier(.2,.7,.2,1);}
 .result.show{display:block;}
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
 
-.profile{display:flex;justify-content:space-between;align-items:flex-end;padding:0 0 22px;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:18px;}
-.profile-left .name{font-size:28px;font-weight:700;letter-spacing:-0.025em;color:var(--ink);line-height:1.1;}
-.profile-left .name.basename{color:var(--base-soft);}
-.profile-left .addr{font-family:var(--mono);font-size:12.5px;color:var(--mute);margin-top:6px;}
-.profile-right{text-align:right;font-family:var(--mono);font-size:11px;color:var(--mute);line-height:1.7;}
-.profile-right b{color:var(--ink);font-weight:500;}
+.grid{display:grid;grid-template-columns:380px 1fr;gap:28px;align-items:start;}
 
-.score-grid{display:grid;grid-template-columns:auto 1fr;gap:42px;align-items:center;margin:36px 0 18px;}
-.ring-wrap{position:relative;width:200px;height:200px;}
-.ring svg{transform:rotate(-90deg);}
-.ring-bg{stroke:var(--bg-3);}
-.ring-fill{stroke:var(--base);transition:stroke-dasharray 1.6s cubic-bezier(.2,.7,.2,1);filter:drop-shadow(0 0 8px var(--base-glow));}
-.ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
-.ring-num{font-size:68px;font-weight:800;letter-spacing:-0.04em;line-height:1;font-feature-settings:"tnum";}
-.ring-of{font-family:var(--mono);font-size:10.5px;color:var(--mute);letter-spacing:0.18em;margin-top:6px;}
-.tier-block .tier-label{font-family:var(--mono);font-size:10.5px;color:var(--mute);letter-spacing:0.22em;text-transform:uppercase;margin-bottom:8px;}
-.tier-block .tier-name{font-size:36px;font-weight:700;letter-spacing:-0.025em;line-height:1.05;}
-.tier-block .tier-stars{font-family:var(--mono);font-size:14px;color:var(--base-soft);margin-top:6px;letter-spacing:0.2em;}
-.tier-block .tier-quote{margin-top:14px;color:var(--mute);font-size:14px;line-height:1.6;max-width:380px;}
+/* LEFT — SUMMARY CARD */
+.summary{position:sticky;top:18px;}
+.score-card{background:var(--bg-2);border:1px solid var(--border);border-radius:16px;padding:28px;text-align:center;}
+.score-card .label{font-family:var(--mono);font-size:10.5px;color:var(--mute);letter-spacing:0.22em;text-transform:uppercase;margin-bottom:10px;}
+.score-num{font-size:84px;font-weight:800;letter-spacing:-0.04em;line-height:1;font-feature-settings:"tnum";color:var(--ink);}
+.score-num em{font-style:normal;font-size:32px;color:var(--mute);font-weight:600;}
+.tier-pill{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;padding:6px 14px;background:var(--base-bg);color:var(--base);border-radius:99px;margin-top:18px;}
+.tier-name{font-size:22px;font-weight:700;letter-spacing:-0.02em;margin-top:14px;}
+.tier-quote{margin-top:10px;color:var(--mute);font-size:13.5px;line-height:1.55;}
 
-.signals{margin-top:42px;}
-.section-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--border);}
-.section-head h3{font-family:var(--mono);font-size:11px;color:var(--mute);letter-spacing:0.22em;text-transform:uppercase;font-weight:500;}
-.section-head .meta{font-family:var(--mono);font-size:11px;color:var(--faint);}
-.signal-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
-.signal{background:var(--bg-2);padding:20px 22px;transition:background .15s;}
-.signal:hover{background:var(--bg-3);}
-.signal-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;gap:12px;}
-.signal-name{font-size:15px;font-weight:600;letter-spacing:-0.015em;display:flex;align-items:center;gap:8px;}
-.signal-name .icon{display:inline-flex;width:24px;height:24px;background:var(--bg-4);border:1px solid var(--border-2);border-radius:6px;align-items:center;justify-content:center;font-size:13px;}
-.signal-num{font-family:var(--mono);font-weight:600;font-size:13px;color:var(--ink);font-feature-settings:"tnum";white-space:nowrap;}
-.signal-num span{color:var(--faint);}
-.signal-bar{height:3px;background:var(--bg-4);border-radius:99px;overflow:hidden;margin-bottom:10px;}
-.signal-bar .fill{height:100%;background:var(--base);border-radius:99px;transition:width 1.2s cubic-bezier(.2,.7,.2,1);}
-.signal-det{font-family:var(--mono);font-size:11.5px;color:var(--mute);line-height:1.55;}
-.signal-det em{font-style:normal;color:var(--ink);}
+.identity{margin-top:20px;padding-top:20px;border-top:1px solid var(--border);text-align:left;}
+.identity .name{font-size:17px;font-weight:600;letter-spacing:-0.015em;}
+.identity .name.basename{color:var(--base);}
+.identity .addr{font-family:var(--mono);font-size:11.5px;color:var(--mute);margin-top:4px;word-break:break-all;}
+.identity-meta{display:flex;justify-content:space-between;margin-top:14px;font-family:var(--mono);font-size:11px;color:var(--mute);}
+.identity-meta b{color:var(--ink);font-weight:500;display:block;font-size:12.5px;margin-top:2px;}
 
-.heatmap{margin-top:30px;padding:22px;background:var(--bg-2);border:1px solid var(--border);border-radius:14px;}
+.actions{margin-top:22px;display:flex;flex-direction:column;gap:8px;}
+.btn{font-family:var(--sans);font-weight:600;font-size:13.5px;padding:11px 18px;background:var(--base);color:#fff;border:1px solid var(--base);border-radius:9px;cursor:pointer;transition:all .15s;width:100%;letter-spacing:-0.005em;}
+.btn:hover{background:var(--base-soft);border-color:var(--base-soft);}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--border-2);}
+.btn.ghost:hover{background:var(--bg-3);border-color:var(--mute);}
+
+/* RIGHT — CRITERIA */
+.criteria-head{padding:0 4px 16px;display:flex;justify-content:space-between;align-items:baseline;}
+.criteria-head h2{font-size:20px;font-weight:700;letter-spacing:-0.025em;}
+.criteria-head .meta{font-family:var(--mono);font-size:11.5px;color:var(--mute);}
+
+.signal{background:var(--bg-2);border:1px solid var(--border);border-radius:14px;margin-bottom:12px;overflow:hidden;transition:border-color .15s;}
+.signal:hover{border-color:var(--border-2);}
+.signal-top{padding:18px 22px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;user-select:none;background:var(--bg);border-bottom:1px solid var(--border);}
+.signal-top:hover{background:var(--bg-2);}
+.signal-name{display:flex;align-items:center;gap:12px;font-size:14.5px;font-weight:600;letter-spacing:-0.015em;}
+.signal-name .icon{display:inline-flex;width:30px;height:30px;background:var(--base-bg);border-radius:8px;align-items:center;justify-content:center;font-size:14px;}
+.signal-num{font-family:var(--mono);font-weight:600;font-size:13px;color:var(--ink);font-feature-settings:"tnum";white-space:nowrap;display:flex;align-items:center;gap:10px;}
+.signal-num .badge{background:var(--base-bg);color:var(--base);padding:3px 10px;border-radius:99px;font-weight:600;}
+.signal-num .badge.full{background:var(--green-bg);color:var(--green);}
+.signal-num .badge.empty{background:var(--red-bg);color:var(--red);}
+.signal-num .chev{color:var(--faint);font-size:14px;transition:transform .2s;}
+.signal.collapsed .signal-top{border-bottom:none;}
+.signal.collapsed .chev{transform:rotate(-90deg);}
+.signal.collapsed .signal-body{display:none;}
+.signal-body{padding:6px 22px 18px;}
+.criterion{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);}
+.criterion:last-child{border-bottom:none;}
+.criterion .check{flex-shrink:0;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin-top:1px;}
+.criterion.pass .check{background:var(--green);color:#fff;}
+.criterion.fail .check{background:var(--bg-4);color:var(--faint);}
+.criterion .body{flex:1;min-width:0;}
+.criterion .head{font-size:13.5px;line-height:1.5;color:var(--ink);}
+.criterion.fail .head{color:var(--mute);}
+.criterion .det{font-family:var(--mono);font-size:11.5px;color:var(--mute);margin-top:3px;}
+.criterion .det em{font-style:normal;color:var(--ink);font-weight:500;}
+.criterion .bonus{display:inline-block;background:var(--amber);color:#fff;font-size:9.5px;font-weight:600;letter-spacing:0.05em;padding:2px 7px;border-radius:4px;margin-left:8px;text-transform:uppercase;vertical-align:middle;}
+
+/* HEATMAP */
+.heatmap{background:var(--bg-2);border:1px solid var(--border);border-radius:14px;margin-top:14px;padding:20px 22px;}
+.heatmap h3{font-size:13.5px;font-weight:600;letter-spacing:-0.015em;display:flex;align-items:center;gap:10px;}
+.heatmap h3 .icon{display:inline-flex;width:28px;height:28px;background:var(--base-bg);border-radius:8px;align-items:center;justify-content:center;font-size:13px;}
 .heat-grid{display:grid;grid-template-columns:repeat(24,1fr);gap:3px;margin-top:14px;}
 .heat-cell{aspect-ratio:1;border-radius:2px;background:var(--bg-4);transition:transform .15s;}
 .heat-cell:hover{transform:scale(1.4);}
 .heat-cell.l1{background:rgba(0,82,255,0.25);}
 .heat-cell.l2{background:rgba(0,82,255,0.5);}
 .heat-cell.l3{background:rgba(0,82,255,0.75);}
-.heat-cell.l4{background:#0052ff;box-shadow:0 0 5px var(--base-glow);}
-.heat-legend{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10.5px;color:var(--faint);margin-top:14px;}
+.heat-cell.l4{background:#0052ff;}
+.heat-legend{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10.5px;color:var(--faint);margin-top:12px;align-items:center;}
+.heat-legend .scale{display:flex;gap:4px;align-items:center;}
+.heat-legend .scale .heat-cell{width:11px;}
 
-.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:34px;}
-.btn{font-family:var(--sans);font-weight:600;font-size:13.5px;padding:12px 22px;background:var(--base);color:#fff;border:1px solid var(--base);border-radius:9px;cursor:pointer;transition:all .15s;}
-.btn:hover{background:var(--base-soft);border-color:var(--base-soft);}
-.btn.ghost{background:transparent;color:var(--ink);border-color:var(--border-2);}
-.btn.ghost:hover{background:var(--bg-3);border-color:var(--mute);}
-
-.status{font-family:var(--mono);font-size:12.5px;text-align:center;margin-top:22px;color:var(--mute);min-height:18px;}
+.status{font-family:var(--mono);font-size:12.5px;text-align:center;margin-top:24px;color:var(--mute);min-height:18px;}
 .status.err{color:var(--red);}
 
-.sample{margin-top:80px;border:1px dashed var(--border-2);border-radius:14px;padding:28px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px 38px;}
-.sample-item .head{display:flex;align-items:center;gap:8px;font-weight:600;font-size:14px;letter-spacing:-0.01em;margin-bottom:5px;}
-.sample-item .head .ic{display:inline-flex;width:22px;height:22px;background:var(--bg-3);border:1px solid var(--border);border-radius:5px;align-items:center;justify-content:center;font-size:11.5px;}
+/* SAMPLE */
+.sample{margin:40px 0 0;border:1px dashed var(--border-2);border-radius:14px;padding:22px 24px;background:var(--bg-2);}
+.sample h3{font-size:12px;font-family:var(--mono);color:var(--mute);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:16px;font-weight:600;}
+.sample-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px 32px;}
+.sample-item .head{display:flex;align-items:center;gap:9px;font-weight:600;font-size:14px;letter-spacing:-0.01em;margin-bottom:4px;}
+.sample-item .head .ic{display:inline-flex;width:24px;height:24px;background:var(--base-bg);border-radius:6px;align-items:center;justify-content:center;font-size:12px;}
 .sample-item .det{font-family:var(--mono);font-size:11.5px;color:var(--mute);}
 
-footer{margin-top:80px;padding-top:24px;border-top:1px solid var(--border);font-family:var(--mono);font-size:11px;color:var(--faint);display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;letter-spacing:0.02em;}
-footer a{color:var(--mute);text-decoration:none;transition:color .15s;}
-footer a:hover{color:var(--base-soft);}
+footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--border);font-family:var(--mono);font-size:11.5px;color:var(--faint);display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;letter-spacing:0.02em;}
+footer a{color:var(--mute);text-decoration:none;border-bottom:1px solid transparent;transition:all .15s;}
+footer a:hover{color:var(--base);border-bottom-color:var(--base);}
 
-@media (max-width:720px){
-  .signal-grid,.sample{grid-template-columns:1fr;}
-  .score-grid{grid-template-columns:1fr;text-align:center;gap:28px;}
-  .ring-wrap{margin:0 auto;}
-  .tier-block .tier-quote{margin-left:auto;margin-right:auto;}
+@media (max-width:880px){
+  .grid{grid-template-columns:1fr;}
+  .summary{position:static;}
+  .sample-grid{grid-template-columns:1fr 1fr;}
+}
+@media (max-width:560px){
+  .sample-grid{grid-template-columns:1fr;}
   .heat-grid{grid-template-columns:repeat(12,1fr);}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
@@ -141,90 +177,91 @@ footer a:hover{color:var(--base-soft);}
 <div class="wrap">
   <header>
     <div class="brand"><div class="brand-mark"></div><div>Builder <em>Score</em></div></div>
-    <div class="hmeta"><span class="dot"></span> Base Mainnet · Live</div>
+    <div class="hmeta"><span class="dot"></span> Base Mainnet</div>
   </header>
 
   <section class="hero">
     <div class="eyebrow">Onchain Reputation · Six Signals</div>
-    <h1><span class="grad">Your wallet, scored.</span><br/><em>Built onchain.</em></h1>
-    <p class="lede">Type a Base address. We read identity, activity, tenure, diversity, stablecoin flow and Ethos reputation directly from chain — and give you back a single number worth screenshotting.</p>
+    <h1>Your wallet, <em>scored.</em><br/>One number worth screenshotting.</h1>
+    <p class="lede">Six onchain signals from your Base mainnet activity — checked criterion by criterion. Identity, activity, tenure, builder work, stablecoin flow and Ethos reputation. No login, no API key, no waiting.</p>
 
     <div class="input-shell">
       <span class="at">›</span>
       <input id="addr" placeholder="0x… or alice.base.eth" spellcheck="false" autocomplete="off"/>
       <button id="goBtn" onclick="run()">Score it →</button>
     </div>
-    <p class="subtle">Free · No wallet connection · Reads from <b>Base mainnet</b>, <b>Basenames</b> &amp; <b>Ethos Network</b></p>
+    <p class="subtle">Free · Reads from <b>Base mainnet</b>, <b>Basenames</b> &amp; <b>Ethos Network</b></p>
   </section>
 
   <div class="result" id="result">
-    <div class="profile">
-      <div class="profile-left">
-        <div class="name" id="pName">—</div>
-        <div class="addr" id="pAddr">—</div>
-      </div>
-      <div class="profile-right">
-        Onchain since <b id="pSince">—</b><br/>
-        Last seen <b id="pLast">—</b>
-      </div>
-    </div>
+    <div class="grid">
+      <!-- LEFT: SUMMARY -->
+      <aside class="summary">
+        <div class="score-card">
+          <div class="label">Builder Score</div>
+          <div class="score-num"><span id="scoreNum">—</span><em>/100</em></div>
+          <div class="tier-pill" id="tierPill">—</div>
+          <div class="tier-name" id="tierName">—</div>
+          <div class="tier-quote" id="tierQuote">—</div>
 
-    <div class="score-grid">
-      <div class="ring-wrap">
-        <svg class="ring" width="200" height="200" viewBox="0 0 200 200">
-          <circle class="ring-bg" cx="100" cy="100" r="86" fill="none" stroke-width="14"/>
-          <circle class="ring-fill" id="ringFill" cx="100" cy="100" r="86" fill="none" stroke-width="14" stroke-linecap="round" stroke-dasharray="0 540" pathLength="540"/>
-        </svg>
-        <div class="ring-center">
-          <div class="ring-num" id="scoreNum">—</div>
-          <div class="ring-of">OUT OF 100</div>
+          <div class="identity">
+            <div class="name" id="pName">—</div>
+            <div class="addr" id="pAddr">—</div>
+            <div class="identity-meta">
+              <div>onchain since<b id="pSince">—</b></div>
+              <div style="text-align:right;">last seen<b id="pLast">—</b></div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="btn" onclick="shareX()">Share on 𝕏</button>
+            <button class="btn ghost" onclick="copyLink()">Copy permalink</button>
+            <button class="btn ghost" onclick="openScan()">View on Basescan ↗</button>
+          </div>
         </div>
-      </div>
-      <div class="tier-block">
-        <div class="tier-label">Tier</div>
-        <div class="tier-name" id="tierName">—</div>
-        <div class="tier-stars" id="tierStars">—</div>
-        <div class="tier-quote" id="tierQuote">—</div>
-      </div>
-    </div>
+      </aside>
 
-    <div class="signals">
-      <div class="section-head">
-        <h3>Builder Signals</h3>
-        <div class="meta">6 inputs · 100 pts</div>
-      </div>
-      <div class="signal-grid" id="signalGrid"></div>
-    </div>
+      <!-- RIGHT: CRITERIA -->
+      <main>
+        <div class="criteria-head">
+          <h2>Builder Signals</h2>
+          <div class="meta" id="critMeta">— criteria met</div>
+        </div>
+        <div id="signalList"></div>
 
-    <div class="heatmap" id="heatmap" style="display:none;">
-      <div class="section-head" style="border:none;margin:0;padding:0;">
-        <h3 style="margin:0;">Recent Activity</h3>
-        <div class="meta" id="heatMeta">—</div>
-      </div>
-      <div class="heat-grid" id="heatGrid"></div>
-      <div class="heat-legend">
-        <span>← 24 weeks ago</span>
-        <span style="display:flex;gap:5px;align-items:center;">less <span class="heat-cell" style="width:10px"></span><span class="heat-cell l1" style="width:10px"></span><span class="heat-cell l2" style="width:10px"></span><span class="heat-cell l3" style="width:10px"></span><span class="heat-cell l4" style="width:10px"></span> more</span>
-        <span>today →</span>
-      </div>
-    </div>
-
-    <div class="actions">
-      <button class="btn" onclick="shareX()">Share on 𝕏</button>
-      <button class="btn ghost" onclick="copyLink()">Copy permalink</button>
-      <button class="btn ghost" onclick="openScan()">View on Basescan ↗</button>
+        <div class="heatmap" id="heatmap" style="display:none;">
+          <h3><span class="icon">📊</span> Recent Activity <span style="margin-left:auto;font-family:var(--mono);font-size:11px;font-weight:500;color:var(--mute);" id="heatMeta">—</span></h3>
+          <div class="heat-grid" id="heatGrid"></div>
+          <div class="heat-legend">
+            <span>← 24 weeks ago</span>
+            <div class="scale">
+              less
+              <span class="heat-cell"></span>
+              <span class="heat-cell l1"></span>
+              <span class="heat-cell l2"></span>
+              <span class="heat-cell l3"></span>
+              <span class="heat-cell l4"></span>
+              more
+            </div>
+            <span>today →</span>
+          </div>
+        </div>
+      </main>
     </div>
 
     <p class="status" id="status"></p>
   </div>
 
   <div class="sample" id="sample">
-    <div class="sample-item"><div class="head"><span class="ic">🏛</span>Identity</div><div class="det">basename · ENS · profile</div></div>
-    <div class="sample-item"><div class="head"><span class="ic">🔥</span>Activity</div><div class="det">tx count · token transfers</div></div>
-    <div class="sample-item"><div class="head"><span class="ic">📅</span>Tenure</div><div class="det">wallet age · active days</div></div>
-    <div class="sample-item"><div class="head"><span class="ic">🧩</span>Diversity</div><div class="det">contracts · methods · types</div></div>
-    <div class="sample-item"><div class="head"><span class="ic">💎</span>Onchain $</div><div class="det">ETH · USDC · swaps</div></div>
-    <div class="sample-item"><div class="head"><span class="ic">🛡</span>Trust</div><div class="det">Ethos · vouches · humanity</div></div>
+    <h3>Six Signals · 100 Points · Checked Criterion by Criterion</h3>
+    <div class="sample-grid">
+      <div class="sample-item"><div class="head"><span class="ic">🏛</span>Identity</div><div class="det">Owns a basename · 5-char or less</div></div>
+      <div class="sample-item"><div class="head"><span class="ic">🔥</span>Activity</div><div class="det">50 / 200 / 500+ transactions</div></div>
+      <div class="sample-item"><div class="head"><span class="ic">📅</span>Tenure</div><div class="det">1 / 3 / 6 / 12+ months onchain</div></div>
+      <div class="sample-item"><div class="head"><span class="ic">🛠</span>Builder</div><div class="det">Deployed a contract ★ bonus</div></div>
+      <div class="sample-item"><div class="head"><span class="ic">💎</span>Onchain $</div><div class="det">ETH · USDC · DeFi flow</div></div>
+      <div class="sample-item"><div class="head"><span class="ic">🛡</span>Trust</div><div class="det">Ethos verified · vouches · reviews</div></div>
+    </div>
   </div>
 
   <footer>
@@ -239,6 +276,8 @@ const RPC = 'https://mainnet.base.org';
 const ETH_RPC = 'https://eth.llamarpc.com';
 const SCAN = 'https://basescan.org';
 const BSC  = 'https://base.blockscout.com/api/v2';
+const BASE_L2_RESOLVER = '0xC6d566A56A1aFf6508b41f6c90ff131615583BCD';
+const BASE_COIN_TYPE_HEX = '80002105';
 const $ = id => document.getElementById(id);
 const provider = new ethers.JsonRpcProvider(RPC, undefined, { staticNetwork: true });
 const mainnet  = new ethers.JsonRpcProvider(ETH_RPC, undefined, { staticNetwork: true });
@@ -247,8 +286,25 @@ let lastResult = null;
 const short = (a,l=6,r=4) => a ? a.slice(0,l)+'…'+a.slice(-r) : '';
 const setStatus = (m,cls) => { const s=$('status'); s.textContent=m||''; s.className='status'+(cls?' '+cls:''); };
 
-async function resolveBasename(name){ try{ return (await mainnet.resolveName(name)) || null; }catch{ return null; } }
-async function reverseBasename(address){ try{ return (await mainnet.lookupAddress(address)) || null; }catch{ return null; } }
+async function resolveBasename(name){
+  try{ return (await mainnet.resolveName(name)) || null; }catch{ return null; }
+}
+
+async function reverseBasename(address){
+  try{ const n = await mainnet.lookupAddress(address); if(n) return n; }catch{}
+  try{
+    const addrLabel = address.toLowerCase().slice(2);
+    const addrLabelHash = ethers.keccak256(ethers.toUtf8Bytes(addrLabel));
+    const baseReverseNode = ethers.namehash(`${BASE_COIN_TYPE_HEX}.reverse`);
+    const reverseNode = ethers.keccak256(ethers.concat([baseReverseNode, addrLabelHash]));
+    const iface = new ethers.Interface(['function name(bytes32) view returns (string)']);
+    const data = iface.encodeFunctionData('name', [reverseNode]);
+    const result = await provider.call({ to: BASE_L2_RESOLVER, data });
+    if(!result || result === '0x') return null;
+    const [n] = iface.decodeFunctionResult('name', result);
+    return n || null;
+  }catch{ return null; }
+}
 
 async function ethosFor(address){
   try{
@@ -264,60 +320,52 @@ async function ethosFor(address){
     const vouches = (stats.vouch && stats.vouch.received) || {};
     return {
       score: (profile && profile.score) || (sc && sc.score) || 0,
-      username: profile && (profile.username || profile.displayName),
       humanVerified: profile && /verified|approved/i.test(String(profile.humanVerificationStatus || '')),
       reviewsPositive: Number(reviews.positive || 0),
       reviewsNegative: Number(reviews.negative || 0),
-      vouchCount: Number(vouches.count || 0),
-      vouchEth: vouches.amountWeiTotal ? Number(vouches.amountWeiTotal) / 1e18 : 0
+      vouchCount: Number(vouches.count || 0)
     };
   }catch{ return null; }
 }
 
 async function loadActivity(address){
   const out = {
-    txCount:0, tokenTransfers:0, balanceEth:0, balanceUsdc:0,
+    txCount:0, tokenTransfers:0, hasEth:false, hasUsdc:false,
     distinctContracts:0, distinctMethods:0,
     firstSeen:null, lastSeen:null, activeDays:0,
     didSwap:false, didBridge:false, didMint:false, hasDeployed:false,
     nftCount:0, timestamps:[]
   };
 
-  // RPC level — always works
   try{
     const [bal, nonce] = await Promise.all([
       provider.getBalance(address),
       provider.getTransactionCount(address)
     ]);
-    out.balanceEth = Number(ethers.formatEther(bal));
+    out.hasEth = Number(ethers.formatEther(bal)) > 0;
     out.txCount = Number(nonce);
-  }catch(e){ console.warn('rpc base', e); }
+  }catch(e){ console.warn('rpc', e); }
 
-  // Blockscout summary
   try{
     const r = await fetch(`${BSC}/addresses/${address}`);
     if(r.ok){
       const s = await r.json();
-      const fromSummary = Number(s.transactions_count || s.transaction_count || s.txs_count || 0);
-      if(fromSummary > out.txCount) out.txCount = fromSummary;
+      const v = Number(s.transactions_count || s.transaction_count || s.txs_count || 0);
+      if(v > out.txCount) out.txCount = v;
       out.tokenTransfers = Number(s.token_transfers_count || 0);
-      if(s.coin_balance != null){
-        const b = Number(s.coin_balance) / 1e18;
-        if(b > out.balanceEth) out.balanceEth = b;
-      }
+      if(s.coin_balance != null && Number(s.coin_balance) > 0) out.hasEth = true;
     }
   }catch(e){ console.warn('bs summary', e); }
 
-  // Transactions
   try{
-    const r = await fetch(`${BSC}/addresses/${address}/transactions?filter=to%20%7C%20from`);
+    const r = await fetch(`${BSC}/addresses/${address}/transactions`);
     if(r.ok){
       const data = await r.json();
       const items = (data.items || []).slice(0, 100);
       const cs = new Set(), ms = new Set(), days = new Set();
       let earliest = null, latest = null;
       for(const t of items){
-        const to = t.to && (t.to.hash || t.to.address) ? (t.to.hash || t.to.address) : null;
+        const to = t.to && (t.to.hash || t.to.address) || null;
         if(to) cs.add(to.toLowerCase());
         if(t.method) ms.add(String(t.method).toLowerCase());
         const ts = t.timestamp ? new Date(t.timestamp).getTime() : null;
@@ -343,22 +391,18 @@ async function loadActivity(address){
     }
   }catch(e){ console.warn('bs txs', e); }
 
-  // NFT count
   try{
     const r = await fetch(`${BSC}/addresses/${address}/nft?type=ERC-721`);
     if(r.ok){ const d = await r.json(); out.nftCount = (d.items || []).length; }
   }catch{}
 
-  // USDC balance
   try{
     const r = await fetch(`${BSC}/addresses/${address}/tokens?type=ERC-20`);
     if(r.ok){
       const d = await r.json();
       for(const t of (d.items || [])){
         const sym = String(t.token && t.token.symbol || '').toUpperCase();
-        if(sym === 'USDC' || sym === 'USDBC'){
-          out.balanceUsdc += Number(t.value || 0) / Math.pow(10, Number(t.token.decimals || 6));
-        }
+        if(sym === 'USDC' || sym === 'USDBC'){ out.hasUsdc = true; break; }
       }
     }
   }catch{}
@@ -374,92 +418,116 @@ const fmtAgo = ts => {
   if(d < 30) return `${d}d ago`;
   if(d < 365) return `${Math.floor(d/30)}mo ago`;
   const y = Math.floor(d / 365), mo = Math.floor((d % 365) / 30);
-  return mo ? `${y}y ${mo}mo ago` : `${y}y ago`;
+  return mo ? `${y}y ${mo}mo` : `${y}y ago`;
 };
 const fmtDate = ts => ts ? new Date(ts).toLocaleDateString('en-US', { year:'numeric', month:'short', day:'numeric' }) : '—';
 
-function score(data){
+function ageMonths(ts){ return ts ? (Date.now() - ts) / (86400000 * 30) : 0; }
+
+/* ── 6 SIGNALS, each with criteria ── */
+function buildSignals(data){
   const a = data.act, e = data.ethos;
-  const signals = [
-    { name:'Identity', icon:'🏛', cap:15,
-      val:()=> (data.basename ? 11 : 0) + (data.basename && data.basename.replace('.base.eth','').length <= 5 ? 4 : 0),
-      det:()=> data.basename ? `Owns <em>${data.basename}</em>` : 'No basename yet — claim one at base.org/names' },
-    { name:'Activity', icon:'🔥', cap:20,
-      val:()=> Math.min(20, Math.round(a.txCount / 6) + Math.min(8, Math.round(a.tokenTransfers / 4))),
-      det:()=> `<em>${a.txCount.toLocaleString()}</em> txs · <em>${a.tokenTransfers.toLocaleString()}</em> token transfers` },
-    { name:'Tenure', icon:'📅', cap:15,
-      val:()=>{
-        if(!a.firstSeen) return a.txCount > 0 ? 3 : 0;
-        const days = (Date.now() - a.firstSeen) / 86400000;
-        return Math.min(15, Math.round(days / 30) + Math.min(4, Math.floor(a.activeDays / 5)));
-      },
-      det:()=> a.firstSeen
-        ? `Onchain <em>${fmtAgo(a.firstSeen)}</em> · last seen ${fmtAgo(a.lastSeen)} · <em>${a.activeDays}</em> active days`
-        : (a.txCount > 0 ? 'Active wallet, timestamp data partial' : 'No activity detected') },
-    { name:'Diversity', icon:'🧩', cap:20,
-      val:()=> Math.min(20,
-        Math.round(a.distinctContracts * 1.2)
-        + Math.min(4, Math.round(a.distinctMethods / 3))
-        + (a.didSwap ? 2 : 0) + (a.didBridge ? 2 : 0) + (a.didMint ? 2 : 0) + (a.hasDeployed ? 4 : 0)),
-      det:()=>{
-        const tags = [];
-        if(a.didSwap) tags.push('swap');
-        if(a.didBridge) tags.push('bridge');
-        if(a.didMint) tags.push('mint');
-        if(a.hasDeployed) tags.push('deployer');
-        if(a.nftCount > 0) tags.push(`${a.nftCount} NFTs`);
-        const t = tags.length ? ` · <em>${tags.join(', ')}</em>` : '';
-        return `<em>${a.distinctContracts}</em> contracts · <em>${a.distinctMethods}</em> methods${t}`;
-      } },
-    { name:'Onchain $', icon:'💎', cap:15,
-      val:()=> (a.balanceUsdc > 0 ? 5 : 0) + (a.didSwap ? 5 : 0) + (a.balanceEth > 0.01 ? 5 : a.balanceEth > 0 ? 2 : 0),
-      det:()=>{
-        const parts = [];
-        if(a.balanceEth > 0) parts.push(`<em>${a.balanceEth.toFixed(4)} ETH</em>`);
-        if(a.balanceUsdc > 0) parts.push(`<em>${a.balanceUsdc.toLocaleString(undefined,{maximumFractionDigits:2})} USDC</em>`);
-        if(a.didSwap) parts.push('swapper');
-        return parts.length ? parts.join(' · ') : 'No stablecoin or DeFi activity';
-      } },
-    { name:'Trust', icon:'🛡', cap:15,
-      val:()=>{
-        if(!e) return 0;
-        let v = 4;
-        if(e.humanVerified) v += 4;
-        v += Math.min(3, e.vouchCount);
-        if(e.reviewsPositive >= 3 && e.reviewsNegative === 0) v += 2;
-        if(e.score >= 1600) v += 2;
-        return Math.min(15, v);
-      },
-      det:()=>{
-        if(!e) return 'No Ethos profile — get yours at <em>ethos.network</em>';
-        const bits = [`Ethos <em>${e.score}</em>`];
-        if(e.humanVerified) bits.push('<em>human verified ✓</em>');
-        if(e.vouchCount > 0) bits.push(`<em>${e.vouchCount}</em> vouch${e.vouchCount > 1 ? 'es' : ''}`);
-        if(e.reviewsPositive > 0) bits.push(`<em>${e.reviewsPositive}</em>↑`);
-        if(e.reviewsNegative > 0) bits.push(`<em>${e.reviewsNegative}</em>↓`);
-        return bits.join(' · ');
-      } }
+  const baseLen = data.basename ? data.basename.replace('.base.eth','').length : 99;
+  const months = ageMonths(a.firstSeen);
+
+  return [
+    {
+      name:'Identity', icon:'🏛', cap:15,
+      criteria:[
+        { pts:11, pass:!!data.basename,
+          head:'Owns a basename',
+          det:data.basename ? `<em>${data.basename}</em>` : 'No basename — claim at base.org/names' },
+        { pts:4, pass:!!data.basename && baseLen <= 5,
+          head:'Premium short name (≤5 chars)',
+          det:data.basename ? `${baseLen} characters` : '—' }
+      ]
+    },
+    {
+      name:'Activity', icon:'🔥', cap:20,
+      criteria:[
+        { pts:5, pass:a.txCount >= 25, head:'25+ transactions',
+          det:`<em>${a.txCount.toLocaleString()}</em> total transactions` },
+        { pts:5, pass:a.txCount >= 100, head:'100+ transactions', det:'' },
+        { pts:5, pass:a.txCount >= 500, head:'500+ transactions', det:'' },
+        { pts:5, pass:a.tokenTransfers >= 50, head:'50+ token transfers',
+          det:`<em>${a.tokenTransfers.toLocaleString()}</em> token transfers` }
+      ]
+    },
+    {
+      name:'Tenure', icon:'📅', cap:15,
+      criteria:[
+        { pts:4, pass:months >= 1, head:'Active 1+ month',
+          det:a.firstSeen ? `onchain <em>${fmtAgo(a.firstSeen)}</em>` : '—' },
+        { pts:4, pass:months >= 6, head:'Active 6+ months', det:'' },
+        { pts:4, pass:months >= 12, head:'Active 1+ year', det:'' },
+        { pts:3, pass:a.activeDays >= 30, head:'30+ active days',
+          det:`<em>${a.activeDays}</em> active days in window` }
+      ]
+    },
+    {
+      name:'Builder', icon:'🛠', cap:20,
+      criteria:[
+        { pts:8, pass:a.hasDeployed, head:'Deployed a smart contract',
+          det:a.hasDeployed ? 'Contract creation found onchain' : 'No contract deployments detected',
+          bonus:true },
+        { pts:4, pass:a.distinctContracts >= 10, head:'Used 10+ unique contracts',
+          det:`<em>${a.distinctContracts}</em> unique contracts` },
+        { pts:2, pass:a.didSwap, head:'Used a DEX (swap)', det:'' },
+        { pts:2, pass:a.didBridge, head:'Bridged in or out', det:'' },
+        { pts:2, pass:a.didMint, head:'Minted an NFT or token', det:'' },
+        { pts:2, pass:a.nftCount > 0, head:'Holds NFTs', det: a.nftCount > 0 ? `<em>${a.nftCount}</em> NFTs` : '' }
+      ]
+    },
+    {
+      name:'Onchain $', icon:'💎', cap:15,
+      criteria:[
+        { pts:4, pass:a.hasEth, head:'Holds ETH on Base', det:'' },
+        { pts:5, pass:a.hasUsdc, head:'Holds a stablecoin (USDC)', det:'' },
+        { pts:6, pass:a.didSwap, head:'Active in DeFi (swap detected)', det:'' }
+      ]
+    },
+    {
+      name:'Trust', icon:'🛡', cap:15,
+      criteria:[
+        { pts:4, pass:!!e, head:'Has Ethos profile',
+          det: e ? `Ethos score <em>${e.score}</em>` : 'No Ethos profile — get one at ethos.network' },
+        { pts:4, pass:e && e.humanVerified, head:'Human verified by Ethos',
+          det: e && e.humanVerified ? 'Verified humanity ✓' : '—', bonus:true },
+        { pts:3, pass:e && e.vouchCount > 0, head:'Has at least one vouch',
+          det: e ? `<em>${e.vouchCount}</em> vouches received` : '—' },
+        { pts:2, pass:e && e.reviewsPositive >= 3 && e.reviewsNegative === 0, head:'3+ positive, 0 negative reviews',
+          det: e ? `<em>${e.reviewsPositive}</em>↑ · <em>${e.reviewsNegative}</em>↓` : '—' },
+        { pts:2, pass:e && e.score >= 1600, head:'Ethos score ≥ 1600', det:'' }
+      ]
+    }
   ];
-  const computed = signals.map(s => {
-    const v = Math.max(0, Math.min(s.cap, s.val()));
-    return { name:s.name, icon:s.icon, cap:s.cap, val:v, det:s.det() };
-  });
-  const total = computed.reduce((sum, s) => sum + s.val, 0);
-  return { total, signals:computed };
+}
+
+function scoreSignals(signals){
+  let total = 0, totalCriteria = 0, passedCriteria = 0;
+  for(const s of signals){
+    let earned = 0;
+    for(const c of s.criteria){
+      totalCriteria++;
+      if(c.pass){ earned += c.pts; passedCriteria++; }
+    }
+    s.earned = Math.min(s.cap, earned);
+    total += s.earned;
+  }
+  return { total, signals, totalCriteria, passedCriteria };
 }
 
 function tierFor(s){
-  if(s >= 88) return { name:'Onchain Native', stars:'★ ★ ★ ★ ★', quote:"You don't use Base — you live on it. Protocols know your address by heart." };
-  if(s >= 70) return { name:'Active Builder', stars:'★ ★ ★ ★', quote:'Consistent, diversified, present. The kind of wallet protocols hope shows up.' };
-  if(s >= 50) return { name:'Curious Explorer', stars:'★ ★ ★', quote:'Past the tutorial. Push a little further and the next tier opens up.' };
-  if(s >= 25) return { name:'New Arrival', stars:'★ ★', quote:"You've made yourself onchain. The story is just beginning." };
-  return { name:'Observer', stars:'★', quote:'Wallet quiet for now. Mint, swap, send — the chain remembers everything.' };
+  if(s >= 88) return { name:'Onchain Native', emoji:'⚡', quote:"You don't use Base — you live on it. Protocols know your address by heart." };
+  if(s >= 70) return { name:'Active Builder', emoji:'🔥', quote:'Consistent, diversified, present. The kind of wallet protocols hope shows up.' };
+  if(s >= 50) return { name:'Curious Explorer', emoji:'🔵', quote:'Past the tutorial. Push a little further and the next tier opens up.' };
+  if(s >= 25) return { name:'New Arrival', emoji:'🌱', quote:"You've made yourself onchain. The story is just beginning." };
+  return { name:'Observer', emoji:'👀', quote:'Wallet quiet for now. Mint, swap, send — the chain remembers everything.' };
 }
 
 function renderHeatmap(timestamps){
   const cells = 24 * 7;
-  const now = Date.now();
-  const startDay = Math.floor(now / 86400000) - cells + 1;
+  const startDay = Math.floor(Date.now() / 86400000) - cells + 1;
   const buckets = new Array(cells).fill(0);
   for(const ts of timestamps){
     const day = Math.floor(ts / 86400000);
@@ -478,22 +546,21 @@ function renderHeatmap(timestamps){
     grid.appendChild(c);
   }
   const activeDays = buckets.filter(b => b > 0).length;
-  $('heatMeta').textContent = `${activeDays} active days · ${timestamps.length} txs in window`;
+  $('heatMeta').textContent = `${activeDays} active days · ${timestamps.length} txs`;
   $('heatmap').style.display = timestamps.length > 0 ? '' : 'none';
 }
 
 function render(data, sc){
   const tier = tierFor(sc.total);
+
   $('pName').textContent = data.basename || 'Wallet Holder';
   $('pName').className = 'name' + (data.basename ? ' basename' : '');
   $('pAddr').textContent = data.address;
   $('pSince').textContent = fmtDate(data.act.firstSeen);
-  $('pLast').textContent = fmtAgo(data.act.lastSeen);
+  $('pLast').textContent  = fmtAgo(data.act.lastSeen);
 
-  const fill = $('ringFill');
+  // Animated count-up
   const target = sc.total;
-  const targetDash = (sc.total / 100) * 540;
-  fill.setAttribute('stroke-dasharray', `${targetDash} 540`);
   let n = 0;
   const tick = () => {
     n = Math.min(target, n + Math.max(1, Math.ceil((target - n) / 8)));
@@ -502,25 +569,41 @@ function render(data, sc){
   };
   requestAnimationFrame(tick);
 
+  $('tierPill').textContent = tier.emoji + ' ' + tier.name;
   $('tierName').textContent = tier.name;
-  $('tierStars').textContent = tier.stars;
   $('tierQuote').textContent = tier.quote;
+  $('critMeta').textContent = `${sc.passedCriteria} / ${sc.totalCriteria} criteria met`;
 
-  const grid = $('signalGrid');
-  grid.innerHTML = '';
-  sc.signals.forEach((s, i) => {
-    const pct = (s.val / s.cap) * 100;
-    const el = document.createElement('div');
-    el.className = 'signal';
-    el.innerHTML = `
-      <div class="signal-top">
+  // Render signals
+  const list = $('signalList');
+  list.innerHTML = '';
+  sc.signals.forEach((s, idx) => {
+    const passed = s.criteria.filter(c => c.pass).length;
+    const total  = s.criteria.length;
+    const badgeClass = s.earned === s.cap ? 'full' : s.earned === 0 ? 'empty' : '';
+    const sig = document.createElement('div');
+    sig.className = 'signal';
+    sig.innerHTML = `
+      <div class="signal-top" onclick="this.parentElement.classList.toggle('collapsed')">
         <div class="signal-name"><span class="icon">${s.icon}</span>${s.name}</div>
-        <div class="signal-num"><b>${s.val}</b><span> / ${s.cap}</span></div>
+        <div class="signal-num">
+          <span class="badge ${badgeClass}">${s.earned} / ${s.cap}</span>
+          <span style="color:var(--mute);font-size:11.5px;">${passed}/${total} checks</span>
+          <span class="chev">▾</span>
+        </div>
       </div>
-      <div class="signal-bar"><div class="fill" style="width:0%"></div></div>
-      <div class="signal-det">${s.det}</div>`;
-    grid.appendChild(el);
-    requestAnimationFrame(() => setTimeout(() => { el.querySelector('.fill').style.width = pct + '%'; }, 100 + i * 80));
+      <div class="signal-body">
+        ${s.criteria.map(c => `
+          <div class="criterion ${c.pass ? 'pass' : 'fail'}">
+            <div class="check">${c.pass ? '✓' : ''}</div>
+            <div class="body">
+              <div class="head">${c.head}${c.bonus ? '<span class="bonus">★ bonus</span>' : ''} <span style="color:var(--faint);font-family:var(--mono);font-size:11px;">+${c.pts}pt</span></div>
+              ${c.det ? `<div class="det">${c.det}</div>` : ''}
+            </div>
+          </div>
+        `).join('')}
+      </div>`;
+    list.appendChild(sig);
   });
 
   renderHeatmap(data.act.timestamps);
@@ -528,7 +611,7 @@ function render(data, sc){
   $('result').classList.add('show');
   $('sample').style.display = 'none';
   lastResult = { data, sc, tier };
-  setStatus(`✓ ${sc.total}/100 — ${tier.name}`);
+  setStatus(`✓ ${sc.total}/100 — ${tier.name} · ${sc.passedCriteria}/${sc.totalCriteria} criteria`);
 }
 
 async function run(){
@@ -554,7 +637,8 @@ async function run(){
       loadActivity(address)
     ]);
     const data = { address, basename, ethos, act };
-    const sc = score(data);
+    const signals = buildSignals(data);
+    const sc = scoreSignals(signals);
     render(data, sc);
   }catch(e){
     setStatus('Failed: ' + (e.message || 'unknown error').slice(0, 100), 'err');
@@ -572,7 +656,7 @@ function shareX(){
   if(!lastResult) return;
   const { sc, tier, data } = lastResult;
   const url = location.origin + location.pathname + '?a=' + encodeURIComponent(data.basename || data.address);
-  const text = `My Base Builder Score: ${sc.total}/100 — ${tier.name}\n\nSix onchain signals: identity, activity, tenure, diversity, $ flow, trust.\n\nCheck yours 👇\n${url}`;
+  const text = `My Base Builder Score: ${sc.total}/100 — ${tier.emoji} ${tier.name}\n\n${sc.passedCriteria}/${sc.totalCriteria} onchain criteria met. Identity, activity, tenure, builder, $ flow, trust.\n\nCheck yours 👇\n${url}`;
   window.open('https://x.com/intent/tweet?text=' + encodeURIComponent(text), '_blank');
 }
 function copyLink(){
