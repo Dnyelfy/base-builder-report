@@ -3,164 +3,135 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Base Builder Report — your onchain certificate</title>
-<meta name="description" content="A certified onchain reputation report for any Base wallet. Six signals (including Ethos trust score), one number, share a stamped certificate to Twitter."/>
-<meta property="og:title" content="Base Builder Report"/>
-<meta property="og:description" content="Get your stamped onchain certificate. Six builder signals scored from Base mainnet activity & Ethos reputation."/>
+<title>Base Builder Score — your onchain reputation, scored</title>
+<meta name="description" content="Six onchain signals turned into a single score. Read activity, identity, trust and reputation for any Base wallet — no login."/>
+<meta property="og:title" content="Base Builder Score"/>
+<meta property="og:description" content="One score. Six signals. Read live from Base mainnet, Basenames and Ethos Network."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
 <style>
 :root{
-  --paper:#f4efe2;
-  --paper-deep:#ebe3d0;
-  --paper-line:#d8cdb0;
-  --ink:#171411;
-  --ink-mute:#4d433a;
-  --ink-faint:#8a7f6f;
-  --base:#0052ff;
-  --base-deep:#003ec2;
-  --stamp:#a83232;
-  --stamp-deep:#7a1f1f;
-  --gold:#a37e00;
-  --green:#246a4a;
-  --serif:'Fraunces',Georgia,serif;
-  --sans:'Inter',-apple-system,sans-serif;
+  --bg:#08090d; --bg-2:#0e1019; --bg-3:#161924; --bg-4:#1d2130;
+  --border:#222536; --border-2:#2d3146;
+  --ink:#f1f3f8; --mute:#8b91a6; --faint:#52576a;
+  --base:#0052ff; --base-glow:rgba(0,82,255,0.18); --base-soft:#3b78ff;
+  --green:#26d987; --amber:#f3b341; --red:#ff5a6a;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
   --mono:'JetBrains Mono',ui-monospace,monospace;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
-html,body{background:var(--paper);color:var(--ink);font-family:var(--sans);min-height:100vh;}
+html,body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;min-height:100vh;}
 body{
-  background-image:
-    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(0,82,255,0.04), transparent 70%),
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 600 600' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.09 0 0 0 0 0.08 0 0 0 0 0.06 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  background:
+    radial-gradient(ellipse 90% 60% at 50% -15%, rgba(0,82,255,0.10), transparent 70%),
+    radial-gradient(ellipse 60% 40% at 50% 110%, rgba(0,82,255,0.05), transparent 60%),
+    var(--bg);
 }
-.wrap{max-width:920px;margin:0 auto;padding:28px 22px 80px;}
+.wrap{max-width:980px;margin:0 auto;padding:24px 22px 80px;}
 
-/* ───── HEADER ───── */
-header{display:flex;justify-content:space-between;align-items:center;padding-bottom:20px;border-bottom:1px solid var(--paper-line);}
-.brand{display:flex;align-items:center;gap:10px;}
-.brand-sq{width:22px;height:22px;background:var(--base);border-radius:4px;}
-.brand-name{font-family:var(--serif);font-weight:600;font-size:17px;letter-spacing:-0.01em;}
-.brand-name em{font-style:italic;font-weight:400;color:var(--ink-mute);}
-.hmeta{font-family:var(--mono);font-size:11px;color:var(--ink-faint);letter-spacing:0.02em;}
+header{display:flex;justify-content:space-between;align-items:center;padding:8px 0 24px;border-bottom:1px solid var(--border);}
+.brand{display:flex;align-items:center;gap:11px;font-weight:700;font-size:16px;letter-spacing:-0.01em;}
+.brand-mark{width:24px;height:24px;background:var(--base);border-radius:6px;position:relative;display:flex;align-items:center;justify-content:center;}
+.brand-mark::after{content:'';width:10px;height:10px;background:var(--bg);border-radius:2px;}
+.brand em{font-style:normal;color:var(--mute);font-weight:500;}
+.hmeta{font-family:var(--mono);font-size:11px;color:var(--mute);letter-spacing:0.02em;display:flex;align-items:center;gap:8px;}
+.hmeta .dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);}
 
-/* ───── HERO ───── */
-.hero{padding:54px 0 30px;text-align:center;}
-.hero .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:0.32em;color:var(--ink-mute);text-transform:uppercase;margin-bottom:18px;}
-.hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(38px,6.5vw,68px);line-height:1.02;letter-spacing:-0.025em;font-style:italic;}
-.hero h1 .stamped{position:relative;display:inline-block;font-style:normal;font-weight:600;color:var(--stamp);transform:rotate(-2.5deg);padding:0 8px;}
-.hero h1 .stamped::before,.hero h1 .stamped::after{content:'';position:absolute;left:-4px;right:-4px;height:2.5px;background:var(--stamp);opacity:0.55;}
-.hero h1 .stamped::before{top:8%;}
-.hero h1 .stamped::after{bottom:14%;}
-.hero p{margin-top:22px;font-size:15px;color:var(--ink-mute);max-width:540px;margin-left:auto;margin-right:auto;line-height:1.65;}
+.hero{padding:64px 0 36px;}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:0.22em;color:var(--base-soft);text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;margin-bottom:22px;}
+.eyebrow::before{content:'';width:18px;height:1px;background:var(--base-soft);}
+h1{font-size:clamp(40px,6vw,68px);font-weight:700;line-height:1.02;letter-spacing:-0.03em;}
+h1 .grad{background:linear-gradient(180deg,#fff 0%,#818699 100%);-webkit-background-clip:text;background-clip:text;color:transparent;}
+h1 em{font-style:normal;color:var(--base-soft);}
+.lede{margin-top:22px;color:var(--mute);font-size:16px;line-height:1.6;max-width:560px;}
 
-/* ───── FORM ───── */
-.form-row{display:flex;gap:0;align-items:stretch;border-bottom:1.5px solid var(--ink);padding:6px 0;max-width:560px;margin:32px auto 0;transition:border-color .2s;}
-.form-row:focus-within{border-bottom-color:var(--base);}
-.form-row input{flex:1;background:none;border:none;outline:none;padding:8px 4px;font-family:var(--mono);font-size:15px;color:var(--ink);}
-.form-row input::placeholder{color:var(--ink-faint);}
-.form-row button{font-family:var(--sans);font-weight:600;font-size:13.5px;letter-spacing:0.02em;padding:9px 18px;background:var(--ink);color:var(--paper);border:none;border-radius:0;cursor:pointer;transition:background .2s;}
-.form-row button:hover{background:var(--base);}
-.form-row button:disabled{background:var(--ink-faint);cursor:wait;}
-.hint{font-family:var(--mono);font-size:11px;color:var(--ink-faint);text-align:center;margin-top:14px;letter-spacing:0.02em;}
+.input-shell{margin-top:36px;max-width:580px;display:flex;border:1px solid var(--border-2);background:var(--bg-2);border-radius:12px;padding:6px 6px 6px 16px;align-items:center;transition:border-color .2s,box-shadow .2s;}
+.input-shell:focus-within{border-color:var(--base);box-shadow:0 0 0 4px var(--base-glow);}
+.input-shell .at{font-family:var(--mono);color:var(--faint);font-size:14px;margin-right:8px;}
+.input-shell input{flex:1;background:none;border:none;outline:none;color:var(--ink);font-family:var(--mono);font-size:14px;padding:13px 0;}
+.input-shell input::placeholder{color:var(--faint);}
+.input-shell button{font-family:var(--sans);font-weight:600;font-size:13.5px;padding:11px 20px;background:var(--base);color:#fff;border:none;border-radius:8px;cursor:pointer;transition:background .15s;}
+.input-shell button:hover{background:var(--base-soft);}
+.input-shell button:disabled{background:var(--faint);cursor:wait;}
+.subtle{font-family:var(--mono);font-size:11px;color:var(--faint);margin-top:14px;letter-spacing:0.02em;}
+.subtle b{color:var(--mute);font-weight:500;}
 
-/* ───── CERTIFICATE ───── */
-.cert{
-  max-width:740px;margin:48px auto 0;
-  background:linear-gradient(180deg, #fbf7ea, #f0e8d2);
-  border:1.5px solid var(--ink);
-  padding:42px 50px 50px;
-  position:relative;
-  box-shadow:
-    0 1px 0 var(--paper-deep),
-    0 22px 50px -22px rgba(23,20,17,0.35),
-    inset 0 0 0 1px rgba(255,255,255,0.5);
-  display:none;
-}
-.cert.show{display:block;}
-.cert::before{content:'';position:absolute;inset:6px;border:1px solid var(--paper-line);pointer-events:none;}
+.result{margin-top:64px;display:none;animation:fadeUp .5s cubic-bezier(.2,.7,.2,1);}
+.result.show{display:block;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
 
-.cert-head{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1px solid var(--paper-line);padding-bottom:18px;}
-.cert-head .left{font-family:var(--mono);font-size:10.5px;color:var(--ink-mute);letter-spacing:0.18em;text-transform:uppercase;}
-.cert-head .right{font-family:var(--mono);font-size:10.5px;color:var(--ink-mute);text-align:right;}
-.cert-title{text-align:center;padding:32px 0 18px;}
-.cert-title .crest{display:inline-block;width:46px;height:46px;background:var(--base);border-radius:9px;margin-bottom:14px;position:relative;}
-.cert-title .crest::after{content:'';position:absolute;inset:9px;border:2px solid var(--paper);border-radius:3px;}
-.cert-title h2{font-family:var(--serif);font-weight:500;font-size:34px;letter-spacing:-0.02em;font-style:italic;}
-.cert-title .sub{font-family:var(--mono);font-size:11px;letter-spacing:0.28em;color:var(--ink-mute);text-transform:uppercase;margin-top:4px;}
+.profile{display:flex;justify-content:space-between;align-items:flex-end;padding:0 0 22px;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:18px;}
+.profile-left .name{font-size:28px;font-weight:700;letter-spacing:-0.025em;color:var(--ink);line-height:1.1;}
+.profile-left .name.basename{color:var(--base-soft);}
+.profile-left .addr{font-family:var(--mono);font-size:12.5px;color:var(--mute);margin-top:6px;}
+.profile-right{text-align:right;font-family:var(--mono);font-size:11px;color:var(--mute);line-height:1.7;}
+.profile-right b{color:var(--ink);font-weight:500;}
 
-.cert-id{display:grid;grid-template-columns:1fr 1fr;gap:22px;padding:24px 0 28px;border-bottom:1px solid var(--paper-line);}
-.cert-id .field label{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:5px;}
-.cert-id .field .val{font-family:var(--mono);font-size:13px;color:var(--ink);word-break:break-all;}
-.cert-id .field .basename{font-family:var(--serif);font-style:italic;font-size:17px;color:var(--base);font-weight:600;}
+.score-grid{display:grid;grid-template-columns:auto 1fr;gap:42px;align-items:center;margin:36px 0 18px;}
+.ring-wrap{position:relative;width:200px;height:200px;}
+.ring svg{transform:rotate(-90deg);}
+.ring-bg{stroke:var(--bg-3);}
+.ring-fill{stroke:var(--base);transition:stroke-dasharray 1.6s cubic-bezier(.2,.7,.2,1);filter:drop-shadow(0 0 8px var(--base-glow));}
+.ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.ring-num{font-size:68px;font-weight:800;letter-spacing:-0.04em;line-height:1;font-feature-settings:"tnum";}
+.ring-of{font-family:var(--mono);font-size:10.5px;color:var(--mute);letter-spacing:0.18em;margin-top:6px;}
+.tier-block .tier-label{font-family:var(--mono);font-size:10.5px;color:var(--mute);letter-spacing:0.22em;text-transform:uppercase;margin-bottom:8px;}
+.tier-block .tier-name{font-size:36px;font-weight:700;letter-spacing:-0.025em;line-height:1.05;}
+.tier-block .tier-stars{font-family:var(--mono);font-size:14px;color:var(--base-soft);margin-top:6px;letter-spacing:0.2em;}
+.tier-block .tier-quote{margin-top:14px;color:var(--mute);font-size:14px;line-height:1.6;max-width:380px;}
 
-/* SCORE BLOCK */
-.score-block{display:flex;align-items:center;justify-content:center;gap:50px;padding:38px 0 26px;flex-wrap:wrap;}
-.stamp{
-  width:175px;height:175px;border-radius:50%;
-  border:3px solid var(--stamp);
-  position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  color:var(--stamp);
-  transform:rotate(-6deg);
-  flex-shrink:0;
-  background:radial-gradient(circle at 30% 30%, rgba(255,255,255,0.45), transparent 60%);
-}
-.stamp::before{content:'';position:absolute;inset:8px;border:1.5px solid var(--stamp);border-radius:50%;opacity:0.5;}
-.stamp .arch-top, .stamp .arch-bot{position:absolute;width:100%;height:100%;}
-.stamp .num{font-family:var(--serif);font-weight:700;font-size:74px;line-height:1;letter-spacing:-0.04em;font-feature-settings:"lnum";}
-.stamp .of{font-family:var(--mono);font-size:10px;letter-spacing:0.2em;margin-top:1px;opacity:0.75;}
-.score-side{flex:1;min-width:240px;}
-.score-side .tier{font-family:var(--serif);font-style:italic;font-size:30px;font-weight:600;letter-spacing:-0.01em;}
-.score-side .tier-sub{font-family:var(--mono);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-mute);margin-top:6px;}
-.score-side .quote{margin-top:14px;font-size:14px;color:var(--ink-mute);line-height:1.6;max-width:280px;}
+.signals{margin-top:42px;}
+.section-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--border);}
+.section-head h3{font-family:var(--mono);font-size:11px;color:var(--mute);letter-spacing:0.22em;text-transform:uppercase;font-weight:500;}
+.section-head .meta{font-family:var(--mono);font-size:11px;color:var(--faint);}
+.signal-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
+.signal{background:var(--bg-2);padding:20px 22px;transition:background .15s;}
+.signal:hover{background:var(--bg-3);}
+.signal-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;gap:12px;}
+.signal-name{font-size:15px;font-weight:600;letter-spacing:-0.015em;display:flex;align-items:center;gap:8px;}
+.signal-name .icon{display:inline-flex;width:24px;height:24px;background:var(--bg-4);border:1px solid var(--border-2);border-radius:6px;align-items:center;justify-content:center;font-size:13px;}
+.signal-num{font-family:var(--mono);font-weight:600;font-size:13px;color:var(--ink);font-feature-settings:"tnum";white-space:nowrap;}
+.signal-num span{color:var(--faint);}
+.signal-bar{height:3px;background:var(--bg-4);border-radius:99px;overflow:hidden;margin-bottom:10px;}
+.signal-bar .fill{height:100%;background:var(--base);border-radius:99px;transition:width 1.2s cubic-bezier(.2,.7,.2,1);}
+.signal-det{font-family:var(--mono);font-size:11.5px;color:var(--mute);line-height:1.55;}
+.signal-det em{font-style:normal;color:var(--ink);}
 
-/* SUB-SCORES */
-.subs{padding-top:26px;border-top:1px solid var(--paper-line);}
-.subs-head{font-family:var(--mono);font-size:10.5px;letter-spacing:0.24em;text-transform:uppercase;color:var(--ink-mute);text-align:center;margin-bottom:18px;}
-.sub-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 32px;}
-.sub{padding:8px 0;}
-.sub-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;}
-.sub-row .name{font-family:var(--serif);font-weight:500;font-size:15px;}
-.sub-row .val{font-family:var(--mono);font-size:12px;color:var(--ink-mute);}
-.sub-row .val b{color:var(--ink);font-weight:500;}
-.sub-bar{height:4px;background:var(--paper-deep);border-radius:0;overflow:hidden;}
-.sub-bar .fill{height:100%;background:var(--ink);transition:width 1s cubic-bezier(.2,.7,.2,1);}
-.sub .det{font-family:var(--mono);font-size:10.5px;color:var(--ink-faint);margin-top:5px;}
+.heatmap{margin-top:30px;padding:22px;background:var(--bg-2);border:1px solid var(--border);border-radius:14px;}
+.heat-grid{display:grid;grid-template-columns:repeat(24,1fr);gap:3px;margin-top:14px;}
+.heat-cell{aspect-ratio:1;border-radius:2px;background:var(--bg-4);transition:transform .15s;}
+.heat-cell:hover{transform:scale(1.4);}
+.heat-cell.l1{background:rgba(0,82,255,0.25);}
+.heat-cell.l2{background:rgba(0,82,255,0.5);}
+.heat-cell.l3{background:rgba(0,82,255,0.75);}
+.heat-cell.l4{background:#0052ff;box-shadow:0 0 5px var(--base-glow);}
+.heat-legend{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10.5px;color:var(--faint);margin-top:14px;}
 
-.cert-foot{display:flex;justify-content:space-between;align-items:flex-end;margin-top:30px;padding-top:22px;border-top:1px solid var(--paper-line);}
-.cert-foot .sig{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--ink);border-bottom:1px solid var(--ink);padding:0 18px 2px;margin-bottom:4px;display:inline-block;}
-.cert-foot .sig-line{font-family:var(--mono);font-size:9.5px;letter-spacing:0.22em;color:var(--ink-faint);text-transform:uppercase;}
-.cert-foot .seal{width:80px;height:80px;border:2.5px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold);font-family:var(--serif);font-size:18px;font-weight:600;font-style:italic;transform:rotate(7deg);text-align:center;line-height:1.05;letter-spacing:-0.02em;background:radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4), transparent 60%);}
+.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:34px;}
+.btn{font-family:var(--sans);font-weight:600;font-size:13.5px;padding:12px 22px;background:var(--base);color:#fff;border:1px solid var(--base);border-radius:9px;cursor:pointer;transition:all .15s;}
+.btn:hover{background:var(--base-soft);border-color:var(--base-soft);}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--border-2);}
+.btn.ghost:hover{background:var(--bg-3);border-color:var(--mute);}
 
-/* ACTIONS */
-.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:32px;}
-.btn{font-family:var(--sans);font-weight:600;font-size:13px;letter-spacing:0.01em;padding:11px 20px;background:var(--ink);color:var(--paper);border:1.5px solid var(--ink);cursor:pointer;transition:all .2s;}
-.btn:hover{background:var(--base);border-color:var(--base);}
-.btn.ghost{background:none;color:var(--ink);}
-.btn.ghost:hover{background:var(--ink);color:var(--paper);}
+.status{font-family:var(--mono);font-size:12.5px;text-align:center;margin-top:22px;color:var(--mute);min-height:18px;}
+.status.err{color:var(--red);}
 
-/* STATUS */
-.status{font-family:var(--mono);font-size:12.5px;text-align:center;margin-top:24px;color:var(--ink-mute);min-height:18px;}
-.status.err{color:var(--stamp);}
+.sample{margin-top:80px;border:1px dashed var(--border-2);border-radius:14px;padding:28px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px 38px;}
+.sample-item .head{display:flex;align-items:center;gap:8px;font-weight:600;font-size:14px;letter-spacing:-0.01em;margin-bottom:5px;}
+.sample-item .head .ic{display:inline-flex;width:22px;height:22px;background:var(--bg-3);border:1px solid var(--border);border-radius:5px;align-items:center;justify-content:center;font-size:11.5px;}
+.sample-item .det{font-family:var(--mono);font-size:11.5px;color:var(--mute);}
 
-/* SAMPLE BLOCK (before checking) */
-.sample{max-width:560px;margin:60px auto 0;padding:24px;border:1px dashed var(--paper-line);font-family:var(--mono);font-size:12.5px;color:var(--ink-mute);line-height:1.85;}
-.sample .row{display:flex;justify-content:space-between;border-bottom:1px dotted var(--paper-line);padding:5px 0;}
-.sample .row:last-child{border:none;}
-.sample .row b{color:var(--ink);font-weight:500;}
-.sample h3{font-family:var(--serif);font-style:italic;font-weight:500;font-size:18px;color:var(--ink);margin-bottom:10px;letter-spacing:-0.01em;}
+footer{margin-top:80px;padding-top:24px;border-top:1px solid var(--border);font-family:var(--mono);font-size:11px;color:var(--faint);display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;letter-spacing:0.02em;}
+footer a{color:var(--mute);text-decoration:none;transition:color .15s;}
+footer a:hover{color:var(--base-soft);}
 
-footer{text-align:center;margin-top:60px;padding-top:22px;border-top:1px solid var(--paper-line);font-family:var(--mono);font-size:11px;color:var(--ink-faint);letter-spacing:0.02em;}
-footer a{color:var(--ink-mute);text-decoration:none;border-bottom:1px solid var(--paper-line);}
-footer a:hover{color:var(--base);border-bottom-color:var(--base);}
-
-@media (max-width:640px){
-  .cert{padding:28px 22px 32px;}
-  .sub-grid{grid-template-columns:1fr;}
-  .cert-id{grid-template-columns:1fr;gap:14px;}
-  .score-block{gap:28px;}
-  .cert-foot{flex-direction:column-reverse;gap:18px;align-items:flex-start;}
+@media (max-width:720px){
+  .signal-grid,.sample{grid-template-columns:1fr;}
+  .score-grid{grid-template-columns:1fr;text-align:center;gap:28px;}
+  .ring-wrap{margin:0 auto;}
+  .tier-block .tier-quote{margin-left:auto;margin-right:auto;}
+  .heat-grid{grid-template-columns:repeat(12,1fr);}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
 </style>
@@ -169,351 +140,290 @@ footer a:hover{color:var(--base);border-bottom-color:var(--base);}
 
 <div class="wrap">
   <header>
-    <div class="brand">
-      <div class="brand-sq"></div>
-      <div class="brand-name">Builder <em>Report</em></div>
-    </div>
-    <div class="hmeta">Base · Mainnet</div>
+    <div class="brand"><div class="brand-mark"></div><div>Builder <em>Score</em></div></div>
+    <div class="hmeta"><span class="dot"></span> Base Mainnet · Live</div>
   </header>
 
   <section class="hero">
-    <div class="eyebrow">Onchain Reputation, Issued On-Site</div>
-    <h1>Your onchain story,<br/><span class="stamped">stamped &amp; certified.</span></h1>
-    <p>Type any Base address. We read its activity, identity and social presence from chain, score six builder signals, and hand you back a certificate worth screenshotting.</p>
+    <div class="eyebrow">Onchain Reputation · Six Signals</div>
+    <h1><span class="grad">Your wallet, scored.</span><br/><em>Built onchain.</em></h1>
+    <p class="lede">Type a Base address. We read identity, activity, tenure, diversity, stablecoin flow and Ethos reputation directly from chain — and give you back a single number worth screenshotting.</p>
 
-    <div class="form-row">
-      <input id="addr" placeholder="0x… or yourname.base.eth" spellcheck="false" autocomplete="off"/>
-      <button id="goBtn" onclick="run()">Generate report →</button>
+    <div class="input-shell">
+      <span class="at">›</span>
+      <input id="addr" placeholder="0x… or alice.base.eth" spellcheck="false" autocomplete="off"/>
+      <button id="goBtn" onclick="run()">Score it →</button>
     </div>
-    <p class="hint">Free · No login · Pulls live data from Base mainnet, Basenames &amp; Ethos Network</p>
+    <p class="subtle">Free · No wallet connection · Reads from <b>Base mainnet</b>, <b>Basenames</b> &amp; <b>Ethos Network</b></p>
   </section>
 
-  <div id="cert" class="cert">
-    <div class="cert-head">
-      <div class="left">
-        Report Nº&nbsp;<span id="reportId">—</span><br/>
-        Issued <span id="issuedDate">—</span>
+  <div class="result" id="result">
+    <div class="profile">
+      <div class="profile-left">
+        <div class="name" id="pName">—</div>
+        <div class="addr" id="pAddr">—</div>
       </div>
-      <div class="right">
-        Network: Base Mainnet<br/>
-        Chain ID: 8453
-      </div>
-    </div>
-
-    <div class="cert-title">
-      <div class="crest"></div>
-      <h2>Onchain Builder Report</h2>
-      <div class="sub">Verified · Base · Onchain</div>
-    </div>
-
-    <div class="cert-id">
-      <div class="field">
-        <label>Issued to</label>
-        <div class="val basename" id="fName">—</div>
-        <div class="val" id="fAddr" style="font-size:11.5px;color:var(--ink-mute);margin-top:3px;">—</div>
-      </div>
-      <div class="field">
-        <label>Onchain since</label>
-        <div class="val" id="fSince">—</div>
-        <div class="val" id="fAge" style="font-size:11.5px;color:var(--ink-mute);margin-top:3px;">—</div>
+      <div class="profile-right">
+        Onchain since <b id="pSince">—</b><br/>
+        Last seen <b id="pLast">—</b>
       </div>
     </div>
 
-    <div class="score-block">
-      <div class="stamp">
-        <svg class="arch-top" viewBox="0 0 175 175" aria-hidden="true">
-          <defs><path id="arcT" d="M 24,87 A 63,63 0 0 1 151,87"/></defs>
-          <text font-family="JetBrains Mono" font-size="9.5" letter-spacing="3.6" fill="currentColor" font-weight="500">
-            <textPath href="#arcT" startOffset="50%" text-anchor="middle">BASE BUILDER REPORT</textPath>
-          </text>
+    <div class="score-grid">
+      <div class="ring-wrap">
+        <svg class="ring" width="200" height="200" viewBox="0 0 200 200">
+          <circle class="ring-bg" cx="100" cy="100" r="86" fill="none" stroke-width="14"/>
+          <circle class="ring-fill" id="ringFill" cx="100" cy="100" r="86" fill="none" stroke-width="14" stroke-linecap="round" stroke-dasharray="0 540" pathLength="540"/>
         </svg>
-        <svg class="arch-bot" viewBox="0 0 175 175" aria-hidden="true">
-          <defs><path id="arcB" d="M 24,108 A 63,63 0 0 0 151,108"/></defs>
-          <text font-family="JetBrains Mono" font-size="8.5" letter-spacing="3.2" fill="currentColor" font-weight="500">
-            <textPath href="#arcB" startOffset="50%" text-anchor="middle">★ ONCHAIN ★ VERIFIED ★</textPath>
-          </text>
-        </svg>
-        <div class="num" id="scoreNum">—</div>
-        <div class="of">OUT OF 100</div>
+        <div class="ring-center">
+          <div class="ring-num" id="scoreNum">—</div>
+          <div class="ring-of">OUT OF 100</div>
+        </div>
       </div>
-      <div class="score-side">
-        <div class="tier" id="tierName">—</div>
-        <div class="tier-sub" id="tierSub">—</div>
-        <div class="quote" id="quote">—</div>
+      <div class="tier-block">
+        <div class="tier-label">Tier</div>
+        <div class="tier-name" id="tierName">—</div>
+        <div class="tier-stars" id="tierStars">—</div>
+        <div class="tier-quote" id="tierQuote">—</div>
       </div>
     </div>
 
-    <div class="subs">
-      <div class="subs-head">— Builder signals —</div>
-      <div class="sub-grid" id="subGrid"></div>
+    <div class="signals">
+      <div class="section-head">
+        <h3>Builder Signals</h3>
+        <div class="meta">6 inputs · 100 pts</div>
+      </div>
+      <div class="signal-grid" id="signalGrid"></div>
     </div>
 
-    <div class="cert-foot">
-      <div>
-        <div class="sig">Builder Report</div>
-        <div class="sig-line">Verified by chain</div>
+    <div class="heatmap" id="heatmap" style="display:none;">
+      <div class="section-head" style="border:none;margin:0;padding:0;">
+        <h3 style="margin:0;">Recent Activity</h3>
+        <div class="meta" id="heatMeta">—</div>
       </div>
-      <div class="seal">CERT<br/>2026</div>
+      <div class="heat-grid" id="heatGrid"></div>
+      <div class="heat-legend">
+        <span>← 24 weeks ago</span>
+        <span style="display:flex;gap:5px;align-items:center;">less <span class="heat-cell" style="width:10px"></span><span class="heat-cell l1" style="width:10px"></span><span class="heat-cell l2" style="width:10px"></span><span class="heat-cell l3" style="width:10px"></span><span class="heat-cell l4" style="width:10px"></span> more</span>
+        <span>today →</span>
+      </div>
     </div>
+
+    <div class="actions">
+      <button class="btn" onclick="shareX()">Share on 𝕏</button>
+      <button class="btn ghost" onclick="copyLink()">Copy permalink</button>
+      <button class="btn ghost" onclick="openScan()">View on Basescan ↗</button>
+    </div>
+
+    <p class="status" id="status"></p>
   </div>
-
-  <div class="actions" id="actions" style="display:none;">
-    <button class="btn" onclick="shareX()">Share on 𝕏</button>
-    <button class="btn ghost" onclick="downloadPng()">Download as PNG</button>
-    <button class="btn ghost" onclick="copyLink()">Copy permalink</button>
-  </div>
-
-  <p class="status" id="status"></p>
 
   <div class="sample" id="sample">
-    <h3>Six signals, one score</h3>
-    <div class="row"><span>🏛 Identity</span><b>Basename · ENS</b></div>
-    <div class="row"><span>🔥 Activity</span><b>tx count · last seen</b></div>
-    <div class="row"><span>📅 Tenure</span><b>wallet age · active days</b></div>
-    <div class="row"><span>🧩 Diversity</span><b>contracts · methods</b></div>
-    <div class="row"><span>💎 Onchain $</span><b>USDC, ETH, swaps</b></div>
-    <div class="row"><span>🛡 Trust</span><b>Ethos score · vouches · humanity</b></div>
+    <div class="sample-item"><div class="head"><span class="ic">🏛</span>Identity</div><div class="det">basename · ENS · profile</div></div>
+    <div class="sample-item"><div class="head"><span class="ic">🔥</span>Activity</div><div class="det">tx count · token transfers</div></div>
+    <div class="sample-item"><div class="head"><span class="ic">📅</span>Tenure</div><div class="det">wallet age · active days</div></div>
+    <div class="sample-item"><div class="head"><span class="ic">🧩</span>Diversity</div><div class="det">contracts · methods · types</div></div>
+    <div class="sample-item"><div class="head"><span class="ic">💎</span>Onchain $</div><div class="det">ETH · USDC · swaps</div></div>
+    <div class="sample-item"><div class="head"><span class="ic">🛡</span>Trust</div><div class="det">Ethos · vouches · humanity</div></div>
   </div>
 
   <footer>
-    Built by <a href="https://x.com/Dnyelfy" target="_blank" rel="noreferrer">@Dnyelfy</a> · Free &amp; ad-free · Made for the Base community<br/>
-    More tools → <a href="https://arc-pay-black.vercel.app" target="_blank" rel="noreferrer">ArcPay</a> · <a href="https://arc-wallet-check.vercel.app" target="_blank" rel="noreferrer">Arc Wallet Check</a> · <a href="https://miden-private-dex.vercel.app" target="_blank" rel="noreferrer">Miden Privacy Suite</a>
+    <div>Built by <a href="https://x.com/Dnyelfy" target="_blank" rel="noreferrer">@Dnyelfy</a> · open data · free forever</div>
+    <div><a href="https://arc-pay-black.vercel.app" target="_blank" rel="noreferrer">ArcPay</a> · <a href="https://arc-wallet-check.vercel.app" target="_blank" rel="noreferrer">Arc Wallet Check</a> · <a href="https://miden-private-dex.vercel.app" target="_blank" rel="noreferrer">Miden Privacy Suite</a></div>
   </footer>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.13.2/ethers.umd.min.js"></script>
 <script>
 const RPC = 'https://mainnet.base.org';
+const ETH_RPC = 'https://eth.llamarpc.com';
 const SCAN = 'https://basescan.org';
 const BSC  = 'https://base.blockscout.com/api/v2';
-const L2_RESOLVER = '0xC6d566A56A1aFf6508b41f6c90ff131615583BCD'; // Basenames L2 Resolver
-const REVERSE_NODE_PREFIX = '0x80792878717f2f9b09c69c5e94ce8c3b3e5d8ef3e8b8e3e3e3e3e3e3e3e3e3e3'; // placeholder
 const $ = id => document.getElementById(id);
-const provider = new ethers.JsonRpcProvider(RPC);
+const provider = new ethers.JsonRpcProvider(RPC, undefined, { staticNetwork: true });
+const mainnet  = new ethers.JsonRpcProvider(ETH_RPC, undefined, { staticNetwork: true });
 
 let lastResult = null;
+const short = (a,l=6,r=4) => a ? a.slice(0,l)+'…'+a.slice(-r) : '';
+const setStatus = (m,cls) => { const s=$('status'); s.textContent=m||''; s.className='status'+(cls?' '+cls:''); };
 
-function short(a, l=6, r=4){ return a ? a.slice(0,l)+'…'+a.slice(-r) : ''; }
-function setStatus(m, cls){ const s=$('status'); s.textContent=m||''; s.className='status'+(cls?' '+cls:''); }
+async function resolveBasename(name){ try{ return (await mainnet.resolveName(name)) || null; }catch{ return null; } }
+async function reverseBasename(address){ try{ return (await mainnet.lookupAddress(address)) || null; }catch{ return null; } }
 
-/* ── Address normalization & basename resolution ──
- * Accept: 0xabc... or alice.base.eth
- * Resolve basename via L2 Resolver (uses namehash + addr(node))
- */
-function namehash(name){
-  let node = '0x' + '00'.repeat(32);
-  if(name){
-    const labels = name.split('.');
-    for(let i = labels.length - 1; i >= 0; i--){
-      const labelHash = ethers.keccak256(ethers.toUtf8Bytes(labels[i]));
-      node = ethers.keccak256(ethers.concat([node, labelHash]));
-    }
-  }
-  return node;
-}
-
-async function resolveBasename(name){
-  try{
-    const node = namehash(name);
-    const iface = new ethers.Interface(['function addr(bytes32) view returns (address)']);
-    const data = iface.encodeFunctionData('addr', [node]);
-    const res = await provider.call({ to: L2_RESOLVER, data });
-    if(!res || res === '0x') return null;
-    const [addr] = iface.decodeFunctionResult('addr', res);
-    return addr === ethers.ZeroAddress ? null : addr;
-  }catch{ return null; }
-}
-
-async function reverseBasename(address){
-  try{
-    const reverseNode = namehash(address.toLowerCase().slice(2) + '.80002105.reverse');
-    const iface = new ethers.Interface(['function name(bytes32) view returns (string)']);
-    const data = iface.encodeFunctionData('name', [reverseNode]);
-    const res = await provider.call({ to: L2_RESOLVER, data });
-    if(!res || res === '0x') return null;
-    const [name] = iface.decodeFunctionResult('name', res);
-    return name || null;
-  }catch{ return null; }
-}
-
-/* ── Ethos Network: credibility score, vouches, human verification ── */
 async function ethosFor(address){
   try{
-    const [profileRes, scoreRes] = await Promise.all([
-      fetch(`https://api.ethos.network/api/v2/user/by/address/${address}`),
-      fetch(`https://api.ethos.network/api/v2/score/address?address=${address}`)
+    const [pr, sr] = await Promise.all([
+      fetch(`https://api.ethos.network/api/v2/user/by/address/${address}`).catch(()=>null),
+      fetch(`https://api.ethos.network/api/v2/score/address?address=${address}`).catch(()=>null)
     ]);
-    if(!profileRes.ok && !scoreRes.ok) return null;
-    const profile = profileRes.ok ? await profileRes.json() : null;
-    const scoreData = scoreRes.ok ? await scoreRes.json() : null;
-    if(!profile && !scoreData) return null;
+    const profile = pr && pr.ok ? await pr.json() : null;
+    const sc      = sr && sr.ok ? await sr.json() : null;
+    if(!profile && !sc) return null;
+    const stats   = (profile && profile.stats) || {};
+    const reviews = (stats.review && stats.review.received) || {};
+    const vouches = (stats.vouch && stats.vouch.received) || {};
     return {
-      score: (profile && profile.score) || (scoreData && scoreData.score) || 0,
+      score: (profile && profile.score) || (sc && sc.score) || 0,
       username: profile && (profile.username || profile.displayName),
       humanVerified: profile && /verified|approved/i.test(String(profile.humanVerificationStatus || '')),
-      reviewsPositive: profile && profile.stats && profile.stats.review && profile.stats.review.received && profile.stats.review.received.positive || 0,
-      reviewsNegative: profile && profile.stats && profile.stats.review && profile.stats.review.received && profile.stats.review.received.negative || 0,
-      vouchCount: profile && profile.stats && profile.stats.vouch && profile.stats.vouch.received && profile.stats.vouch.received.count || 0,
-      vouchEth: profile && profile.stats && profile.stats.vouch && profile.stats.vouch.received && profile.stats.vouch.received.amountWeiTotal
-        ? Number(profile.stats.vouch.received.amountWeiTotal) / 1e18 : 0,
-      xp: profile && profile.xpTotal || 0,
-      profileUrl: profile && profile.links && profile.links.profile
+      reviewsPositive: Number(reviews.positive || 0),
+      reviewsNegative: Number(reviews.negative || 0),
+      vouchCount: Number(vouches.count || 0),
+      vouchEth: vouches.amountWeiTotal ? Number(vouches.amountWeiTotal) / 1e18 : 0
     };
   }catch{ return null; }
 }
 
-/* ── Base Blockscout data ── */
-async function bscFetch(path){
-  const r = await fetch(`${BSC}${path}`);
-  if(!r.ok) throw new Error('blockscout ' + r.status);
-  return r.json();
-}
-
 async function loadActivity(address){
   const out = {
-    txCount: 0, tokenTransfers: 0, balance: 0,
-    distinctContracts: 0, distinctMethods: 0,
-    firstSeen: null, lastSeen: null,
-    activeDays: 0, hasDeployed: false,
-    didSwap: false, didBridge: false, didMint: false,
-    nftCount: 0, usdcSeen: false,
+    txCount:0, tokenTransfers:0, balanceEth:0, balanceUsdc:0,
+    distinctContracts:0, distinctMethods:0,
+    firstSeen:null, lastSeen:null, activeDays:0,
+    didSwap:false, didBridge:false, didMint:false, hasDeployed:false,
+    nftCount:0, timestamps:[]
   };
-  // address summary
-  try{
-    const a = await bscFetch(`/addresses/${address}`);
-    out.txCount = Number(a.transactions_count || a.transaction_count || 0);
-    out.tokenTransfers = Number(a.token_transfers_count || 0);
-    out.balance = Number(a.coin_balance || 0) / 1e18;
-    out.hasDeployed = Boolean(a.has_decompiled_code) || (a.creator_address_hash != null && false);
-  }catch(e){ /* tolerate */ }
 
-  // last 50 outgoing txs
+  // RPC level — always works
   try{
-    const tx = await bscFetch(`/addresses/${address}/transactions?filter=to%20%7C%20from`);
-    const items = (tx.items || []).slice(0, 100);
-    const cs = new Set(), ms = new Set(), days = new Set();
-    let earliest = null, latest = null;
-    for(const t of items){
-      if(t.to && t.to.hash){ cs.add(t.to.hash.toLowerCase()); }
-      if(t.method) ms.add(String(t.method).toLowerCase());
-      if(t.timestamp){
-        const ts = new Date(t.timestamp).getTime();
-        if(!earliest || ts < earliest) earliest = ts;
-        if(!latest || ts > latest) latest = ts;
-        days.add(Math.floor(ts / 86400000));
+    const [bal, nonce] = await Promise.all([
+      provider.getBalance(address),
+      provider.getTransactionCount(address)
+    ]);
+    out.balanceEth = Number(ethers.formatEther(bal));
+    out.txCount = Number(nonce);
+  }catch(e){ console.warn('rpc base', e); }
+
+  // Blockscout summary
+  try{
+    const r = await fetch(`${BSC}/addresses/${address}`);
+    if(r.ok){
+      const s = await r.json();
+      const fromSummary = Number(s.transactions_count || s.transaction_count || s.txs_count || 0);
+      if(fromSummary > out.txCount) out.txCount = fromSummary;
+      out.tokenTransfers = Number(s.token_transfers_count || 0);
+      if(s.coin_balance != null){
+        const b = Number(s.coin_balance) / 1e18;
+        if(b > out.balanceEth) out.balanceEth = b;
       }
-      const m = String(t.method || '').toLowerCase();
-      if(/swap|exactinput|exactoutput|multicall/.test(m)) out.didSwap = true;
-      if(/bridge|deposit|sendmessage|relay/.test(m)) out.didBridge = true;
-      if(/mint|claim/.test(m)) out.didMint = true;
-      if(t.to && /(?:contract|deploy)/i.test(t.tx_types?.join(',') || '')) out.hasDeployed = true;
-      if(!t.to && t.created_contract) out.hasDeployed = true;
     }
-    out.distinctContracts = cs.size;
-    out.distinctMethods = ms.size;
-    out.activeDays = days.size;
-    if(earliest){ out.firstSeen = earliest; out.lastSeen = latest; }
-  }catch(e){ /* tolerate */ }
+  }catch(e){ console.warn('bs summary', e); }
 
-  // NFT count (best effort)
+  // Transactions
   try{
-    const n = await bscFetch(`/addresses/${address}/nft?type=ERC-721`);
-    out.nftCount = (n.items || []).length;
-  }catch(e){}
-
-  // USDC balance check
-  try{
-    const tk = await bscFetch(`/addresses/${address}/tokens?type=ERC-20`);
-    for(const t of (tk.items || [])){
-      const sym = (t.token && t.token.symbol || '').toUpperCase();
-      if(sym === 'USDC' || sym === 'USDBC' || sym === 'EURC') out.usdcSeen = true;
+    const r = await fetch(`${BSC}/addresses/${address}/transactions?filter=to%20%7C%20from`);
+    if(r.ok){
+      const data = await r.json();
+      const items = (data.items || []).slice(0, 100);
+      const cs = new Set(), ms = new Set(), days = new Set();
+      let earliest = null, latest = null;
+      for(const t of items){
+        const to = t.to && (t.to.hash || t.to.address) ? (t.to.hash || t.to.address) : null;
+        if(to) cs.add(to.toLowerCase());
+        if(t.method) ms.add(String(t.method).toLowerCase());
+        const ts = t.timestamp ? new Date(t.timestamp).getTime() : null;
+        if(ts){
+          out.timestamps.push(ts);
+          if(!earliest || ts < earliest) earliest = ts;
+          if(!latest || ts > latest) latest = ts;
+          days.add(Math.floor(ts / 86400000));
+        }
+        const m = String(t.method || '').toLowerCase();
+        if(/swap|exactinput|exactoutput|multicall/.test(m)) out.didSwap = true;
+        if(/bridge|deposit|sendmessage|relay|burnlocked/.test(m)) out.didBridge = true;
+        if(/mint|claim/.test(m)) out.didMint = true;
+        if(t.tx_types && Array.isArray(t.tx_types) && t.tx_types.includes('contract_creation')) out.hasDeployed = true;
+        if(!t.to && (t.created_contract || t.contract_address)) out.hasDeployed = true;
+      }
+      out.distinctContracts = cs.size;
+      out.distinctMethods = ms.size;
+      out.activeDays = days.size;
+      if(earliest) out.firstSeen = earliest;
+      if(latest)   out.lastSeen  = latest;
+      if(items.length > out.txCount) out.txCount = items.length;
     }
-  }catch(e){}
+  }catch(e){ console.warn('bs txs', e); }
+
+  // NFT count
+  try{
+    const r = await fetch(`${BSC}/addresses/${address}/nft?type=ERC-721`);
+    if(r.ok){ const d = await r.json(); out.nftCount = (d.items || []).length; }
+  }catch{}
+
+  // USDC balance
+  try{
+    const r = await fetch(`${BSC}/addresses/${address}/tokens?type=ERC-20`);
+    if(r.ok){
+      const d = await r.json();
+      for(const t of (d.items || [])){
+        const sym = String(t.token && t.token.symbol || '').toUpperCase();
+        if(sym === 'USDC' || sym === 'USDBC'){
+          out.balanceUsdc += Number(t.value || 0) / Math.pow(10, Number(t.token.decimals || 6));
+        }
+      }
+    }
+  }catch{}
 
   return out;
 }
 
-function fmtAgo(ts){
+const fmtAgo = ts => {
   if(!ts) return '—';
   const d = Math.floor((Date.now() - ts) / 86400000);
   if(d <= 0) return 'today';
   if(d === 1) return 'yesterday';
-  if(d < 30) return `${d} days ago`;
-  if(d < 365) return `${Math.floor(d/30)} months ago`;
+  if(d < 30) return `${d}d ago`;
+  if(d < 365) return `${Math.floor(d/30)}mo ago`;
   const y = Math.floor(d / 365), mo = Math.floor((d % 365) / 30);
-  return mo ? `${y}y ${mo}mo ago` : `${y} years ago`;
-}
+  return mo ? `${y}y ${mo}mo ago` : `${y}y ago`;
+};
+const fmtDate = ts => ts ? new Date(ts).toLocaleDateString('en-US', { year:'numeric', month:'short', day:'numeric' }) : '—';
 
-function fmtDate(ts){
-  if(!ts) return '—';
-  return new Date(ts).toLocaleDateString('en-US', { year:'numeric', month:'short', day:'numeric' });
-}
-
-/* ── Scoring ── */
 function score(data){
-  const subs = [
-    {
-      name:'Identity',
-      cap:15,
-      get:()=>(data.basename ? 12 : 0) + (data.basename && data.basename.length <= 6 ? 3 : 0),
-      det:()=>data.basename ? `Owns ${data.basename}` : 'No basename — register one at base.org/names'
-    },
-    {
-      name:'Activity',
-      cap:20,
-      get:()=>Math.min(20, Math.round(data.act.txCount / 8) + Math.min(8, Math.round(data.act.tokenTransfers / 4))),
-      det:()=>`${data.act.txCount} txs · ${data.act.tokenTransfers} token transfers`
-    },
-    {
-      name:'Tenure',
-      cap:15,
-      get:()=>{
-        if(!data.act.firstSeen) return 0;
-        const days = (Date.now() - data.act.firstSeen) / 86400000;
-        return Math.min(15, Math.round(days / 30));
+  const a = data.act, e = data.ethos;
+  const signals = [
+    { name:'Identity', icon:'🏛', cap:15,
+      val:()=> (data.basename ? 11 : 0) + (data.basename && data.basename.replace('.base.eth','').length <= 5 ? 4 : 0),
+      det:()=> data.basename ? `Owns <em>${data.basename}</em>` : 'No basename yet — claim one at base.org/names' },
+    { name:'Activity', icon:'🔥', cap:20,
+      val:()=> Math.min(20, Math.round(a.txCount / 6) + Math.min(8, Math.round(a.tokenTransfers / 4))),
+      det:()=> `<em>${a.txCount.toLocaleString()}</em> txs · <em>${a.tokenTransfers.toLocaleString()}</em> token transfers` },
+    { name:'Tenure', icon:'📅', cap:15,
+      val:()=>{
+        if(!a.firstSeen) return a.txCount > 0 ? 3 : 0;
+        const days = (Date.now() - a.firstSeen) / 86400000;
+        return Math.min(15, Math.round(days / 30) + Math.min(4, Math.floor(a.activeDays / 5)));
       },
-      det:()=>data.act.firstSeen
-        ? `Onchain ${fmtAgo(data.act.firstSeen)} · last ${fmtAgo(data.act.lastSeen)}`
-        : 'No activity yet'
-    },
-    {
-      name:'Diversity',
-      cap:20,
-      get:()=>Math.min(20,
-        Math.round(data.act.distinctContracts * 1.4)
-        + Math.min(4, Math.round(data.act.distinctMethods / 3))
-        + (data.act.didSwap ? 2 : 0)
-        + (data.act.didBridge ? 2 : 0)
-        + (data.act.didMint ? 2 : 0)
-      ),
+      det:()=> a.firstSeen
+        ? `Onchain <em>${fmtAgo(a.firstSeen)}</em> · last seen ${fmtAgo(a.lastSeen)} · <em>${a.activeDays}</em> active days`
+        : (a.txCount > 0 ? 'Active wallet, timestamp data partial' : 'No activity detected') },
+    { name:'Diversity', icon:'🧩', cap:20,
+      val:()=> Math.min(20,
+        Math.round(a.distinctContracts * 1.2)
+        + Math.min(4, Math.round(a.distinctMethods / 3))
+        + (a.didSwap ? 2 : 0) + (a.didBridge ? 2 : 0) + (a.didMint ? 2 : 0) + (a.hasDeployed ? 4 : 0)),
       det:()=>{
         const tags = [];
-        if(data.act.didSwap) tags.push('swap');
-        if(data.act.didBridge) tags.push('bridge');
-        if(data.act.didMint) tags.push('mint');
-        if(data.act.hasDeployed) tags.push('deploy');
-        return `${data.act.distinctContracts} contracts · ${data.act.distinctMethods} methods${tags.length?' · '+tags.join(', '):''}`;
-      }
-    },
-    {
-      name:'Onchain $',
-      cap:15,
-      get:()=>(data.act.usdcSeen ? 6 : 0) + (data.act.didSwap ? 5 : 0) + (data.act.balance > 0.01 ? 4 : 0),
+        if(a.didSwap) tags.push('swap');
+        if(a.didBridge) tags.push('bridge');
+        if(a.didMint) tags.push('mint');
+        if(a.hasDeployed) tags.push('deployer');
+        if(a.nftCount > 0) tags.push(`${a.nftCount} NFTs`);
+        const t = tags.length ? ` · <em>${tags.join(', ')}</em>` : '';
+        return `<em>${a.distinctContracts}</em> contracts · <em>${a.distinctMethods}</em> methods${t}`;
+      } },
+    { name:'Onchain $', icon:'💎', cap:15,
+      val:()=> (a.balanceUsdc > 0 ? 5 : 0) + (a.didSwap ? 5 : 0) + (a.balanceEth > 0.01 ? 5 : a.balanceEth > 0 ? 2 : 0),
       det:()=>{
         const parts = [];
-        if(data.act.balance > 0) parts.push(`${data.act.balance.toFixed(3)} ETH`);
-        if(data.act.usdcSeen) parts.push('USDC seen');
-        if(data.act.didSwap) parts.push('swapper');
-        return parts.length ? parts.join(' · ') : 'No stablecoin activity';
-      }
-    },
-    {
-      name:'Trust',
-      cap:15,
-      get:()=>{
-        if(!data.ethos) return 0;
-        const e = data.ethos;
-        let v = 4; // has Ethos profile
+        if(a.balanceEth > 0) parts.push(`<em>${a.balanceEth.toFixed(4)} ETH</em>`);
+        if(a.balanceUsdc > 0) parts.push(`<em>${a.balanceUsdc.toLocaleString(undefined,{maximumFractionDigits:2})} USDC</em>`);
+        if(a.didSwap) parts.push('swapper');
+        return parts.length ? parts.join(' · ') : 'No stablecoin or DeFi activity';
+      } },
+    { name:'Trust', icon:'🛡', cap:15,
+      val:()=>{
+        if(!e) return 0;
+        let v = 4;
         if(e.humanVerified) v += 4;
         v += Math.min(3, e.vouchCount);
         if(e.reviewsPositive >= 3 && e.reviewsNegative === 0) v += 2;
@@ -521,110 +431,131 @@ function score(data){
         return Math.min(15, v);
       },
       det:()=>{
-        if(!data.ethos) return 'No Ethos profile — get yours at ethos.network';
-        const e = data.ethos;
-        const bits = [];
-        bits.push(`Ethos ${e.score}`);
-        if(e.humanVerified) bits.push('human verified ✓');
-        if(e.vouchCount > 0) bits.push(`${e.vouchCount} vouch${e.vouchCount > 1 ? 'es' : ''}`);
-        if(e.reviewsPositive > 0) bits.push(`${e.reviewsPositive}↑`);
-        if(e.reviewsNegative > 0) bits.push(`${e.reviewsNegative}↓`);
+        if(!e) return 'No Ethos profile — get yours at <em>ethos.network</em>';
+        const bits = [`Ethos <em>${e.score}</em>`];
+        if(e.humanVerified) bits.push('<em>human verified ✓</em>');
+        if(e.vouchCount > 0) bits.push(`<em>${e.vouchCount}</em> vouch${e.vouchCount > 1 ? 'es' : ''}`);
+        if(e.reviewsPositive > 0) bits.push(`<em>${e.reviewsPositive}</em>↑`);
+        if(e.reviewsNegative > 0) bits.push(`<em>${e.reviewsNegative}</em>↓`);
         return bits.join(' · ');
-      }
-    }
+      } }
   ];
-
-  const computed = subs.map(s => {
-    const v = Math.max(0, Math.min(s.cap, s.get()));
-    return { name:s.name, cap:s.cap, val:v, det:s.det() };
+  const computed = signals.map(s => {
+    const v = Math.max(0, Math.min(s.cap, s.val()));
+    return { name:s.name, icon:s.icon, cap:s.cap, val:v, det:s.det() };
   });
-  const total = computed.reduce((a,b) => a + b.val, 0);
-  return { total, subs:computed };
+  const total = computed.reduce((sum, s) => sum + s.val, 0);
+  return { total, signals:computed };
 }
 
-function tierFor(score){
-  if(score >= 88) return { name:'Onchain Native', sub:'★ ★ ★ ★ ★', quote:'You don\'t use Base — you live on it. The protocols know your address by heart.' };
-  if(score >= 70) return { name:'Active Builder', sub:'★ ★ ★ ★', quote:'Consistent, curious, diversified. The kind of wallet protocols hope shows up.' };
-  if(score >= 50) return { name:'Curious Explorer', sub:'★ ★ ★', quote:'You\'re past the tutorial. Push further and the next tier is yours.' };
-  if(score >= 25) return { name:'New Arrival', sub:'★ ★', quote:'You\'ve set foot onchain. The story is just beginning.' };
-  return { name:'Observer', sub:'★', quote:'Wallet quiet for now. Mint something, send something — the chain remembers everything.' };
+function tierFor(s){
+  if(s >= 88) return { name:'Onchain Native', stars:'★ ★ ★ ★ ★', quote:"You don't use Base — you live on it. Protocols know your address by heart." };
+  if(s >= 70) return { name:'Active Builder', stars:'★ ★ ★ ★', quote:'Consistent, diversified, present. The kind of wallet protocols hope shows up.' };
+  if(s >= 50) return { name:'Curious Explorer', stars:'★ ★ ★', quote:'Past the tutorial. Push a little further and the next tier opens up.' };
+  if(s >= 25) return { name:'New Arrival', stars:'★ ★', quote:"You've made yourself onchain. The story is just beginning." };
+  return { name:'Observer', stars:'★', quote:'Wallet quiet for now. Mint, swap, send — the chain remembers everything.' };
 }
 
-/* ── Render ── */
-function renderCert(data, sc){
+function renderHeatmap(timestamps){
+  const cells = 24 * 7;
+  const now = Date.now();
+  const startDay = Math.floor(now / 86400000) - cells + 1;
+  const buckets = new Array(cells).fill(0);
+  for(const ts of timestamps){
+    const day = Math.floor(ts / 86400000);
+    const idx = day - startDay;
+    if(idx >= 0 && idx < cells) buckets[idx]++;
+  }
+  const max = Math.max(1, ...buckets);
+  const grid = $('heatGrid');
+  grid.innerHTML = '';
+  for(let day = 0; day < cells; day++){
+    const v = buckets[day];
+    const lvl = v === 0 ? 0 : v >= max * 0.66 ? 4 : v >= max * 0.33 ? 3 : v >= max * 0.15 ? 2 : 1;
+    const c = document.createElement('div');
+    c.className = 'heat-cell' + (lvl ? ' l' + lvl : '');
+    c.title = `${new Date((startDay + day) * 86400000).toLocaleDateString()} · ${v} tx`;
+    grid.appendChild(c);
+  }
+  const activeDays = buckets.filter(b => b > 0).length;
+  $('heatMeta').textContent = `${activeDays} active days · ${timestamps.length} txs in window`;
+  $('heatmap').style.display = timestamps.length > 0 ? '' : 'none';
+}
+
+function render(data, sc){
   const tier = tierFor(sc.total);
-  $('reportId').textContent = '#' + (data.address.slice(2, 8).toUpperCase());
-  $('issuedDate').textContent = new Date().toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
-  $('fName').textContent = data.basename ? data.basename : 'Wallet Holder';
-  $('fAddr').textContent = data.address;
-  $('fSince').textContent = fmtDate(data.act.firstSeen);
-  $('fAge').textContent = fmtAgo(data.act.firstSeen);
+  $('pName').textContent = data.basename || 'Wallet Holder';
+  $('pName').className = 'name' + (data.basename ? ' basename' : '');
+  $('pAddr').textContent = data.address;
+  $('pSince').textContent = fmtDate(data.act.firstSeen);
+  $('pLast').textContent = fmtAgo(data.act.lastSeen);
 
-  // Animate score
-  const stampEl = $('scoreNum');
-  let n = 0; const target = sc.total;
+  const fill = $('ringFill');
+  const target = sc.total;
+  const targetDash = (sc.total / 100) * 540;
+  fill.setAttribute('stroke-dasharray', `${targetDash} 540`);
+  let n = 0;
   const tick = () => {
     n = Math.min(target, n + Math.max(1, Math.ceil((target - n) / 8)));
-    stampEl.textContent = n;
+    $('scoreNum').textContent = n;
     if(n < target) requestAnimationFrame(tick);
   };
   requestAnimationFrame(tick);
 
   $('tierName').textContent = tier.name;
-  $('tierSub').textContent = tier.sub;
-  $('quote').textContent = tier.quote;
+  $('tierStars').textContent = tier.stars;
+  $('tierQuote').textContent = tier.quote;
 
-  // Sub-scores
-  const grid = $('subGrid');
+  const grid = $('signalGrid');
   grid.innerHTML = '';
-  sc.subs.forEach((s, i) => {
+  sc.signals.forEach((s, i) => {
     const pct = (s.val / s.cap) * 100;
-    const div = document.createElement('div');
-    div.className = 'sub';
-    div.innerHTML = `
-      <div class="sub-row"><span class="name">${s.name}</span><span class="val"><b>${s.val}</b> / ${s.cap}</span></div>
-      <div class="sub-bar"><div class="fill" style="width:0%"></div></div>
-      <div class="det">${s.det}</div>`;
-    grid.appendChild(div);
-    requestAnimationFrame(() => {
-      setTimeout(() => { div.querySelector('.fill').style.width = pct + '%'; }, 80 + i * 90);
-    });
+    const el = document.createElement('div');
+    el.className = 'signal';
+    el.innerHTML = `
+      <div class="signal-top">
+        <div class="signal-name"><span class="icon">${s.icon}</span>${s.name}</div>
+        <div class="signal-num"><b>${s.val}</b><span> / ${s.cap}</span></div>
+      </div>
+      <div class="signal-bar"><div class="fill" style="width:0%"></div></div>
+      <div class="signal-det">${s.det}</div>`;
+    grid.appendChild(el);
+    requestAnimationFrame(() => setTimeout(() => { el.querySelector('.fill').style.width = pct + '%'; }, 100 + i * 80));
   });
 
-  $('cert').classList.add('show');
-  $('actions').style.display = 'flex';
+  renderHeatmap(data.act.timestamps);
+
+  $('result').classList.add('show');
   $('sample').style.display = 'none';
   lastResult = { data, sc, tier };
-  setStatus(`✓ Report ready · ${sc.total}/100 — ${tier.name}`);
+  setStatus(`✓ ${sc.total}/100 — ${tier.name}`);
 }
 
-/* ── Main run ── */
 async function run(){
   const raw = $('addr').value.trim();
-  if(!raw){ setStatus('Enter a Base address or basename.','err'); return; }
+  if(!raw){ setStatus('Enter a Base address or basename.', 'err'); return; }
   $('goBtn').disabled = true;
-  setStatus('Resolving address…');
+  setStatus('Resolving…');
   try{
     let address;
     if(/^0x[a-fA-F0-9]{40}$/.test(raw)){
       address = ethers.getAddress(raw);
-    } else if(/\.base\.eth$/i.test(raw) || /\.eth$/i.test(raw)){
+    } else if(/\.eth$/i.test(raw)){
+      setStatus('Resolving basename via ENS L1 + CCIP…');
       address = await resolveBasename(raw.toLowerCase());
-      if(!address){ throw new Error('Could not resolve ' + raw); }
+      if(!address) throw new Error('Could not resolve ' + raw);
     } else {
       throw new Error('Enter 0x… or a *.base.eth name');
     }
-
     setStatus('Reading from Base mainnet, Basenames & Ethos…');
     const [basename, ethos, act] = await Promise.all([
       reverseBasename(address),
       ethosFor(address),
       loadActivity(address)
     ]);
-
     const data = { address, basename, ethos, act };
     const sc = score(data);
-    renderCert(data, sc);
+    render(data, sc);
   }catch(e){
     setStatus('Failed: ' + (e.message || 'unknown error').slice(0, 100), 'err');
   } finally {
@@ -634,63 +565,25 @@ async function run(){
 
 $('addr').addEventListener('keydown', e => { if(e.key === 'Enter') run(); });
 
-/* Pre-fill from URL */
 const qp = new URLSearchParams(location.search);
 if(qp.get('a')){ $('addr').value = qp.get('a'); run(); }
 
-/* ── Share / Download ── */
 function shareX(){
   if(!lastResult) return;
   const { sc, tier, data } = lastResult;
-  const name = data.basename || short(data.address, 6, 4);
   const url = location.origin + location.pathname + '?a=' + encodeURIComponent(data.basename || data.address);
-  const text = `My onchain Base score: ${sc.total}/100 — ${tier.name}\n\nIssued to ${name}, certified by the chain itself.\n\nCheck yours 👇 built on @base by @Dnyelfy\n${url}`;
+  const text = `My Base Builder Score: ${sc.total}/100 — ${tier.name}\n\nSix onchain signals: identity, activity, tenure, diversity, $ flow, trust.\n\nCheck yours 👇\n${url}`;
   window.open('https://x.com/intent/tweet?text=' + encodeURIComponent(text), '_blank');
 }
-
 function copyLink(){
   if(!lastResult) return;
-  const data = lastResult.data;
-  const url = location.origin + location.pathname + '?a=' + encodeURIComponent(data.basename || data.address);
+  const d = lastResult.data;
+  const url = location.origin + location.pathname + '?a=' + encodeURIComponent(d.basename || d.address);
   navigator.clipboard.writeText(url).then(() => setStatus('✓ Permalink copied'));
 }
-
-async function downloadPng(){
+function openScan(){
   if(!lastResult) return;
-  setStatus('Rendering PNG…');
-  try{
-    const cert = $('cert');
-    const rect = cert.getBoundingClientRect();
-    const W = Math.round(rect.width * 2), H = Math.round(rect.height * 2);
-    // Build an SVG that embeds the cert as foreignObject for high-fidelity render
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${rect.width} ${rect.height}">
-      <foreignObject width="100%" height="100%">
-        <div xmlns="http://www.w3.org/1999/xhtml">${new XMLSerializer().serializeToString(cert)}</div>
-      </foreignObject>
-    </svg>`;
-    const blob = new Blob([svg], { type:'image/svg+xml' });
-    const url = URL.createObjectURL(blob);
-    const img = new Image();
-    img.onload = () => {
-      const c = document.createElement('canvas');
-      c.width = W; c.height = H;
-      const x = c.getContext('2d');
-      x.fillStyle = '#f4efe2'; x.fillRect(0,0,W,H);
-      x.drawImage(img, 0, 0, W, H);
-      c.toBlob(b => {
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(b);
-        a.download = `base-builder-report-${lastResult.data.basename || short(lastResult.data.address)}.png`;
-        a.click();
-        URL.revokeObjectURL(url);
-        setStatus('✓ Saved');
-      });
-    };
-    img.onerror = () => setStatus('PNG render failed — try Share on X instead', 'err');
-    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
-  }catch(e){
-    setStatus('Render failed: ' + e.message, 'err');
-  }
+  window.open(`${SCAN}/address/${lastResult.data.address}`, '_blank');
 }
 </script>
 </body>
